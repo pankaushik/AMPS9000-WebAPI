@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AMPS9000ModelStoreContainer" CdmEntityContainer="AMPS9000Entities">
+    <EntitySetMapping Name="Alerts">
+      <EntityTypeMapping TypeName="AMPS9000Model.Alert">
+        <MappingFragment StoreEntitySet="Alerts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DashboardInd" ColumnName="DashboardInd" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="Complete" ColumnName="Complete" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypes">
+      <EntityTypeMapping TypeName="AMPS9000Model.AssetType">
+        <MappingFragment StoreEntitySet="AssetTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BranchOfServices">
+      <EntityTypeMapping TypeName="AMPS9000Model.BranchOfService">
+        <MappingFragment StoreEntitySet="BranchOfService">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COCOMs">
+      <EntityTypeMapping TypeName="AMPS9000Model.COCOM">
+        <MappingFragment StoreEntitySet="COCOMs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="AMPS9000Model.Company">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="AMPS9000Model.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DutyPositions">
+      <EntityTypeMapping TypeName="AMPS9000Model.DutyPosition">
+        <MappingFragment StoreEntitySet="DutyPositions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroundControlSystems">
+      <EntityTypeMapping TypeName="AMPS9000Model.GroundControlSystem">
+        <MappingFragment StoreEntitySet="GroundControlSystems">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IC_ISM_Classifications">
+      <EntityTypeMapping TypeName="AMPS9000Model.IC_ISM_Classifications">
+        <MappingFragment StoreEntitySet="IC_ISM_Classifications">
+          <ScalarProperty Name="ClassificationMarkingValue" ColumnName="ClassificationMarkingValue" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntelReqStatus">
+      <EntityTypeMapping TypeName="AMPS9000Model.IntelReqStatu">
+        <MappingFragment StoreEntitySet="IntelReqStatus">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="IntelRequestID" ColumnName="IntelRequestID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="StatusDateTime" ColumnName="StatusDateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IntelRequests">
+      <EntityTypeMapping TypeName="AMPS9000Model.IntelRequest">
+        <MappingFragment StoreEntitySet="IntelRequests">
+          <ScalarProperty Name="IntelRequestID" ColumnName="IntelRequestID" />
+          <ScalarProperty Name="OrignatedDateTime" ColumnName="OrignatedDateTime" />
+          <ScalarProperty Name="OrginatorPersonnelID" ColumnName="OrginatorPersonnelID" />
+          <ScalarProperty Name="AreaOfOperations" ColumnName="AreaOfOperations" />
+          <ScalarProperty Name="SupportedCommand" ColumnName="SupportedCommand" />
+          <ScalarProperty Name="SupportedUnit" ColumnName="SupportedUnit" />
+          <ScalarProperty Name="NamedOperation" ColumnName="NamedOperation" />
+          <ScalarProperty Name="MissionType" ColumnName="MissionType" />
+          <ScalarProperty Name="SubMissionType" ColumnName="SubMissionType" />
+          <ScalarProperty Name="ActiveDateTimeStart" ColumnName="ActiveDateTimeStart" />
+          <ScalarProperty Name="ActiveDateTimeEnd" ColumnName="ActiveDateTimeEnd" />
+          <ScalarProperty Name="BestCollectionTime" ColumnName="BestCollectionTime" />
+          <ScalarProperty Name="LatestTimeIntelValue" ColumnName="LatestTimeIntelValue" />
+          <ScalarProperty Name="PriorityIntelRequirement" ColumnName="PriorityIntelRequirement" />
+          <ScalarProperty Name="SpecialInstructions" ColumnName="SpecialInstructions" />
+          <ScalarProperty Name="PrimaryPayload" ColumnName="PrimaryPayload" />
+          <ScalarProperty Name="SecondaryPayload" ColumnName="SecondaryPayload" />
+          <ScalarProperty Name="Armed" ColumnName="Armed" />
+          <ScalarProperty Name="PointofContact" ColumnName="PointofContact" />
+          <ScalarProperty Name="ReportClassification" ColumnName="ReportClassification" />
+          <ScalarProperty Name="LIMIDSRequest" ColumnName="LIMIDSRequest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="AMPS9000Model.Location">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+          <ScalarProperty Name="LocationReferenceCode" ColumnName="LocationReferenceCode" />
+          <ScalarProperty Name="LocationPhoto" ColumnName="LocationPhoto" />
+          <ScalarProperty Name="LocationDocument" ColumnName="LocationDocument" />
+          <ScalarProperty Name="LocationMapImage" ColumnName="LocationMapImage" />
+          <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+          <ScalarProperty Name="LocationStreet" ColumnName="LocationStreet" />
+          <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+          <ScalarProperty Name="LocationPostalCode" ColumnName="LocationPostalCode" />
+          <ScalarProperty Name="LocationCountry" ColumnName="LocationCountry" />
+          <ScalarProperty Name="LocationCOCOM" ColumnName="LocationCOCOM" />
+          <ScalarProperty Name="LocationRegion" ColumnName="LocationRegion" />
+          <ScalarProperty Name="LocationLatitude" ColumnName="LocationLatitude" />
+          <ScalarProperty Name="LocationLongitude" ColumnName="LocationLongitude" />
+          <ScalarProperty Name="LocationMGRS" ColumnName="LocationMGRS" />
+          <ScalarProperty Name="LocationElevation" ColumnName="LocationElevation" />
+          <ScalarProperty Name="LocationPointofContact" ColumnName="LocationPointofContact" />
+          <ScalarProperty Name="LocationFrequency" ColumnName="LocationFrequency" />
+          <ScalarProperty Name="KML" ColumnName="KML" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MissionTypes">
+      <EntityTypeMapping TypeName="AMPS9000Model.MissionType">
+        <MappingFragment StoreEntitySet="MissionType">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MOS_Desc">
+      <EntityTypeMapping TypeName="AMPS9000Model.MOS_Desc">
+        <MappingFragment StoreEntitySet="MOS_Desc">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="MOSCode" ColumnName="MOSCode" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MunitionRoles">
+      <EntityTypeMapping TypeName="AMPS9000Model.MunitionRole">
+        <MappingFragment StoreEntitySet="MunitionRoles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Munitions">
+      <EntityTypeMapping TypeName="AMPS9000Model.Munition">
+        <MappingFragment StoreEntitySet="Munitions">
+          <ScalarProperty Name="MunitionID" ColumnName="MunitionID" />
+          <ScalarProperty Name="MunitionsReferenceCode" ColumnName="MunitionsReferenceCode" />
+          <ScalarProperty Name="MunitionWireframe" ColumnName="MunitionWireframe" />
+          <ScalarProperty Name="MunitionPhoto" ColumnName="MunitionPhoto" />
+          <ScalarProperty Name="Munition3D" ColumnName="Munition3D" />
+          <ScalarProperty Name="MunitionIcon" ColumnName="MunitionIcon" />
+          <ScalarProperty Name="Munition2525B" ColumnName="Munition2525B" />
+          <ScalarProperty Name="MunitionDatasheet" ColumnName="MunitionDatasheet" />
+          <ScalarProperty Name="MunitionName" ColumnName="MunitionName" />
+          <ScalarProperty Name="MunitionNomenclature" ColumnName="MunitionNomenclature" />
+          <ScalarProperty Name="MunitionRole" ColumnName="MunitionRole" />
+          <ScalarProperty Name="MunitionManufacturer" ColumnName="MunitionManufacturer" />
+          <ScalarProperty Name="MunitionExecutiveAgent" ColumnName="MunitionExecutiveAgent" />
+          <ScalarProperty Name="MunitionContractProgram" ColumnName="MunitionContractProgram" />
+          <ScalarProperty Name="MunitionCost" ColumnName="MunitionCost" />
+          <ScalarProperty Name="MunitionCostNotes" ColumnName="MunitionCostNotes" />
+          <ScalarProperty Name="MunitionLength" ColumnName="MunitionLength" />
+          <ScalarProperty Name="MunitionWidthDiameter" ColumnName="MunitionWidthDiameter" />
+          <ScalarProperty Name="MunitionWeight" ColumnName="MunitionWeight" />
+          <ScalarProperty Name="MunitionWingspan" ColumnName="MunitionWingspan" />
+          <ScalarProperty Name="MunitionWarhead" ColumnName="MunitionWarhead" />
+          <ScalarProperty Name="MunitionEngine" ColumnName="MunitionEngine" />
+          <ScalarProperty Name="MunitionRange" ColumnName="MunitionRange" />
+          <ScalarProperty Name="MunitionSpeed" ColumnName="MunitionSpeed" />
+          <ScalarProperty Name="MunitionGuideanceSys" ColumnName="MunitionGuideanceSys" />
+          <ScalarProperty Name="MunitionLaunchPlatform" ColumnName="MunitionLaunchPlatform" />
+          <ScalarProperty Name="MunitionWeatherRestriction" ColumnName="MunitionWeatherRestriction" />
+          <ScalarProperty Name="MunitionCrewCount" ColumnName="MunitionCrewCount" />
+          <ScalarProperty Name="MunitionMOS1" ColumnName="MunitionMOS1" />
+          <ScalarProperty Name="MunitionMOS2" ColumnName="MunitionMOS2" />
+          <ScalarProperty Name="MunitionMOS3" ColumnName="MunitionMOS3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MunitionStatus">
+      <EntityTypeMapping TypeName="AMPS9000Model.MunitionStatu">
+        <MappingFragment StoreEntitySet="MunitionStatus">
+          <ScalarProperty Name="MunitionID" ColumnName="MunitionID" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="StatusComments" ColumnName="StatusComments" />
+          <ScalarProperty Name="ETIC" ColumnName="ETIC" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OperationAreas">
+      <EntityTypeMapping TypeName="AMPS9000Model.OperationArea">
+        <MappingFragment StoreEntitySet="OperationAreas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="AMPS9000Model.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="OrderRelFTN" ColumnName="OrderRelFTN" />
+          <ScalarProperty Name="OrderIssued" ColumnName="OrderIssued" />
+          <ScalarProperty Name="OrderStart" ColumnName="OrderStart" />
+          <ScalarProperty Name="OrderEnd" ColumnName="OrderEnd" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="OrderMission" ColumnName="OrderMission" />
+          <ScalarProperty Name="ServiceBranch" ColumnName="ServiceBranch" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="OrderSubCMD1" ColumnName="OrderSubCMD1" />
+          <ScalarProperty Name="OrderSubCMD2" ColumnName="OrderSubCMD2" />
+          <ScalarProperty Name="OrderDetail" ColumnName="OrderDetail" />
+          <ScalarProperty Name="OrderNotes" ColumnName="OrderNotes" />
+          <ScalarProperty Name="OrderLegacyDoc" ColumnName="OrderLegacyDoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderTypes">
+      <EntityTypeMapping TypeName="AMPS9000Model.OrderType">
+        <MappingFragment StoreEntitySet="OrderTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayGrades">
+      <EntityTypeMapping TypeName="AMPS9000Model.PayGrade">
+        <MappingFragment StoreEntitySet="PayGrades">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="GradeType" ColumnName="GradeType" />
+          <ScalarProperty Name="PayGrade1" ColumnName="PayGrade" />
+          <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayloadRoles">
+      <EntityTypeMapping TypeName="AMPS9000Model.PayloadRole">
+        <MappingFragment StoreEntitySet="PayloadRoles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payloads">
+      <EntityTypeMapping TypeName="AMPS9000Model.Payload">
+        <MappingFragment StoreEntitySet="Payloads">
+          <ScalarProperty Name="PayloadID" ColumnName="PayloadID" />
+          <ScalarProperty Name="PayloadReferenceCode" ColumnName="PayloadReferenceCode" />
+          <ScalarProperty Name="PaylodWireframe" ColumnName="PaylodWireframe" />
+          <ScalarProperty Name="PayloadPhoto" ColumnName="PayloadPhoto" />
+          <ScalarProperty Name="Payload3D" ColumnName="Payload3D" />
+          <ScalarProperty Name="PayloadIcon" ColumnName="PayloadIcon" />
+          <ScalarProperty Name="Payload2525B" ColumnName="Payload2525B" />
+          <ScalarProperty Name="PayloadDatasheet" ColumnName="PayloadDatasheet" />
+          <ScalarProperty Name="PayloadName" ColumnName="PayloadName" />
+          <ScalarProperty Name="PayloadNomenclature" ColumnName="PayloadNomenclature" />
+          <ScalarProperty Name="PayloadRole" ColumnName="PayloadRole" />
+          <ScalarProperty Name="PayloadManufacturer" ColumnName="PayloadManufacturer" />
+          <ScalarProperty Name="PayloadExecutiveAgent" ColumnName="PayloadExecutiveAgent" />
+          <ScalarProperty Name="PayloadContractProgram" ColumnName="PayloadContractProgram" />
+          <ScalarProperty Name="PayloadCost" ColumnName="PayloadCost" />
+          <ScalarProperty Name="PayloadCostNotes" ColumnName="PayloadCostNotes" />
+          <ScalarProperty Name="PayloadLength" ColumnName="PayloadLength" />
+          <ScalarProperty Name="PayloadWidth" ColumnName="PayloadWidth" />
+          <ScalarProperty Name="PayloadHeight" ColumnName="PayloadHeight" />
+          <ScalarProperty Name="PayloadWeight" ColumnName="PayloadWeight" />
+          <ScalarProperty Name="PayloadPower" ColumnName="PayloadPower" />
+          <ScalarProperty Name="PayloadConnector1" ColumnName="PayloadConnector1" />
+          <ScalarProperty Name="PayloadConnector2" ColumnName="PayloadConnector2" />
+          <ScalarProperty Name="PayloadDaySpotter" ColumnName="PayloadDaySpotter" />
+          <ScalarProperty Name="PayloadThermalImager" ColumnName="PayloadThermalImager" />
+          <ScalarProperty Name="PayloadLaserDesginator" ColumnName="PayloadLaserDesginator" />
+          <ScalarProperty Name="PayloadContinuousZoom" ColumnName="PayloadContinuousZoom" />
+          <ScalarProperty Name="PayloadStabalization" ColumnName="PayloadStabalization" />
+          <ScalarProperty Name="PayloadVibrationIsolation" ColumnName="PayloadVibrationIsolation" />
+          <ScalarProperty Name="PayloadAutoTracker" ColumnName="PayloadAutoTracker" />
+          <ScalarProperty Name="PayloadGPSTimeSync" ColumnName="PayloadGPSTimeSync" />
+          <ScalarProperty Name="PayloadInternalGPS" ColumnName="PayloadInternalGPS" />
+          <ScalarProperty Name="PayloadInternalINS" ColumnName="PayloadInternalINS" />
+          <ScalarProperty Name="PayloadMetadata" ColumnName="PayloadMetadata" />
+          <ScalarProperty Name="PayloadCrewCount" ColumnName="PayloadCrewCount" />
+          <ScalarProperty Name="PayloadMOS1" ColumnName="PayloadMOS1" />
+          <ScalarProperty Name="PayloadMOS2" ColumnName="PayloadMOS2" />
+          <ScalarProperty Name="PayloadMOS3" ColumnName="PayloadMOS3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDPersonnels">
+      <EntityTypeMapping TypeName="AMPS9000Model.PEDPersonnel">
+        <MappingFragment StoreEntitySet="PEDPersonnel">
+          <ScalarProperty Name="PEDID" ColumnName="PEDID" />
+          <ScalarProperty Name="PersonnelID" ColumnName="PersonnelID" />
+          <ScalarProperty Name="AssignmentDate" ColumnName="AssignmentDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDTeams">
+      <EntityTypeMapping TypeName="AMPS9000Model.PEDTeam">
+        <MappingFragment StoreEntitySet="PEDTeams">
+          <ScalarProperty Name="PEDID" ColumnName="PEDID" />
+          <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+          <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="StatusDateTime" ColumnName="StatusDateTime" />
+          <ScalarProperty Name="StatusComments" ColumnName="StatusComments" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PEDTypes">
+      <EntityTypeMapping TypeName="AMPS9000Model.PEDType">
+        <MappingFragment StoreEntitySet="PEDTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personnels">
+      <EntityTypeMapping TypeName="AMPS9000Model.Personnel">
+        <MappingFragment StoreEntitySet="Personnel">
+          <ScalarProperty Name="PersonnelID" ColumnName="PersonnelID" />
+          <ScalarProperty Name="PersonnelReferenceCode" ColumnName="PersonnelReferenceCode" />
+          <ScalarProperty Name="PersonnelPhoto" ColumnName="PersonnelPhoto" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleInitial" ColumnName="MiddleInitial" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PayGrade" ColumnName="PayGrade" />
+          <ScalarProperty Name="Rank" ColumnName="Rank" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Clearance" ColumnName="Clearance" />
+          <ScalarProperty Name="CACid" ColumnName="CACid" />
+          <ScalarProperty Name="CallSign" ColumnName="CallSign" />
+          <ScalarProperty Name="ServiceBranch" ColumnName="ServiceBranch" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="AssignedUnit" ColumnName="AssignedUnit" />
+          <ScalarProperty Name="DeployedUnit" ColumnName="DeployedUnit" />
+          <ScalarProperty Name="MOS1" ColumnName="MOS1" />
+          <ScalarProperty Name="MOS2" ColumnName="MOS2" />
+          <ScalarProperty Name="MOS3" ColumnName="MOS3" />
+          <ScalarProperty Name="DutyPosition1" ColumnName="DutyPosition1" />
+          <ScalarProperty Name="DutyPosition2" ColumnName="DutyPosition2" />
+          <ScalarProperty Name="DutyPosition3" ColumnName="DutyPosition3" />
+          <ScalarProperty Name="SpecialQuals1" ColumnName="SpecialQuals1" />
+          <ScalarProperty Name="SpecialQuals2" ColumnName="SpecialQuals2" />
+          <ScalarProperty Name="SpecialQuals3" ColumnName="SpecialQuals3" />
+          <ScalarProperty Name="CurrentAssignmentStart" ColumnName="CurrentAssignmentStart" />
+          <ScalarProperty Name="CurrentAssignmentEnd" ColumnName="CurrentAssignmentEnd" />
+          <ScalarProperty Name="DSN" ColumnName="DSN" />
+          <ScalarProperty Name="EmailNIPR" ColumnName="EmailNIPR" />
+          <ScalarProperty Name="EmailSIPR" ColumnName="EmailSIPR" />
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PersonnelStatus">
+      <EntityTypeMapping TypeName="AMPS9000Model.PersonnelStatu">
+        <MappingFragment StoreEntitySet="PersonnelStatus">
+          <ScalarProperty Name="PersonnelID" ColumnName="PersonnelID" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="PersonnelArrive" ColumnName="PersonnelArrive" />
+          <ScalarProperty Name="PersonnelDepart" ColumnName="PersonnelDepart" />
+          <ScalarProperty Name="PersonnelRemarks" ColumnName="PersonnelRemarks" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatformCategories">
+      <EntityTypeMapping TypeName="AMPS9000Model.PlatformCategory">
+        <MappingFragment StoreEntitySet="PlatformCategories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatformRoles">
+      <EntityTypeMapping TypeName="AMPS9000Model.PlatformRole">
+        <MappingFragment StoreEntitySet="PlatformRoles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Platforms">
+      <EntityTypeMapping TypeName="AMPS9000Model.Platform">
+        <MappingFragment StoreEntitySet="Platforms">
+          <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
+          <ScalarProperty Name="PlatformWireframe" ColumnName="PlatformWireframe" />
+          <ScalarProperty Name="PlatformPhoto" ColumnName="PlatformPhoto" />
+          <ScalarProperty Name="Platform3D" ColumnName="Platform3D" />
+          <ScalarProperty Name="PlatformIcon" ColumnName="PlatformIcon" />
+          <ScalarProperty Name="Platform2525B" ColumnName="Platform2525B" />
+          <ScalarProperty Name="PlatformDatasheet" ColumnName="PlatformDatasheet" />
+          <ScalarProperty Name="PlatformTailNumber" ColumnName="PlatformTailNumber" />
+          <ScalarProperty Name="PlatformName" ColumnName="PlatformName" />
+          <ScalarProperty Name="PlatformNomenclature" ColumnName="PlatformNomenclature" />
+          <ScalarProperty Name="PlatformCategory" ColumnName="PlatformCategory" />
+          <ScalarProperty Name="PlatformService" ColumnName="PlatformService" />
+          <ScalarProperty Name="PlatformRole" ColumnName="PlatformRole" />
+          <ScalarProperty Name="PlatformManufacturer" ColumnName="PlatformManufacturer" />
+          <ScalarProperty Name="PlatformExecutiveAgent" ColumnName="PlatformExecutiveAgent" />
+          <ScalarProperty Name="PlatformContractProgram" ColumnName="PlatformContractProgram" />
+          <ScalarProperty Name="PlatformCost" ColumnName="PlatformCost" />
+          <ScalarProperty Name="PlatformCostNotes" ColumnName="PlatformCostNotes" />
+          <ScalarProperty Name="PlatformIOCDate" ColumnName="PlatformIOCDate" />
+          <ScalarProperty Name="PlatformGroundStation" ColumnName="PlatformGroundStation" />
+          <ScalarProperty Name="PlatformLength" ColumnName="PlatformLength" />
+          <ScalarProperty Name="PlatformWingspan" ColumnName="PlatformWingspan" />
+          <ScalarProperty Name="PlatformHeight" ColumnName="PlatformHeight" />
+          <ScalarProperty Name="PlatformWeight" ColumnName="PlatformWeight" />
+          <ScalarProperty Name="PlatformPowerPlant" ColumnName="PlatformPowerPlant" />
+          <ScalarProperty Name="PlatformFuelCapacity" ColumnName="PlatformFuelCapacity" />
+          <ScalarProperty Name="PlatformCruisingSpeed" ColumnName="PlatformCruisingSpeed" />
+          <ScalarProperty Name="PlatformRange" ColumnName="PlatformRange" />
+          <ScalarProperty Name="PlatformCeiling" ColumnName="PlatformCeiling" />
+          <ScalarProperty Name="PlatformMaxTakeOff" ColumnName="PlatformMaxTakeOff" />
+          <ScalarProperty Name="PlatformMinRunway" ColumnName="PlatformMinRunway" />
+          <ScalarProperty Name="PlatformPayloadCapacity" ColumnName="PlatformPayloadCapacity" />
+          <ScalarProperty Name="PlatformPayloadCount" ColumnName="PlatformPayloadCount" />
+          <ScalarProperty Name="PlatformPayload1" ColumnName="PlatformPayload1" />
+          <ScalarProperty Name="PlatformPayload2" ColumnName="PlatformPayload2" />
+          <ScalarProperty Name="PlatformPayload3" ColumnName="PlatformPayload3" />
+          <ScalarProperty Name="PlatformArmamentCapacity" ColumnName="PlatformArmamentCapacity" />
+          <ScalarProperty Name="PlatformArmamentCount" ColumnName="PlatformArmamentCount" />
+          <ScalarProperty Name="PlatformArmament1" ColumnName="PlatformArmament1" />
+          <ScalarProperty Name="PlatformArmament2" ColumnName="PlatformArmament2" />
+          <ScalarProperty Name="PlatformArmament3" ColumnName="PlatformArmament3" />
+          <ScalarProperty Name="PlatformComs1" ColumnName="PlatformComs1" />
+          <ScalarProperty Name="PlatformComs2" ColumnName="PlatformComs2" />
+          <ScalarProperty Name="PlatformFlightCrewReq" ColumnName="PlatformFlightCrewReq" />
+          <ScalarProperty Name="PlatformLineCrewReq" ColumnName="PlatformLineCrewReq" />
+          <ScalarProperty Name="PlatformPayloadCrewReq" ColumnName="PlatformPayloadCrewReq" />
+          <ScalarProperty Name="PlatformPEDCrewReq" ColumnName="PlatformPEDCrewReq" />
+          <ScalarProperty Name="PlatformFlightCrewMOS" ColumnName="PlatformFlightCrewMOS" />
+          <ScalarProperty Name="PlatformLineCrewMOS" ColumnName="PlatformLineCrewMOS" />
+          <ScalarProperty Name="PlatformPayloadCrewMOS" ColumnName="PlatformPayloadCrewMOS" />
+          <ScalarProperty Name="PlatformPEDCrewMOS" ColumnName="PlatformPEDCrewMOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlatformStatus">
+      <EntityTypeMapping TypeName="AMPS9000Model.PlatformStatu">
+        <MappingFragment StoreEntitySet="PlatformStatus">
+          <ScalarProperty Name="PlatformID" ColumnName="PlatformID" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="StatusComments" ColumnName="StatusComments" />
+          <ScalarProperty Name="ETIC" ColumnName="ETIC" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PointsofInterests">
+      <EntityTypeMapping TypeName="AMPS9000Model.PointsofInterest">
+        <MappingFragment StoreEntitySet="PointsofInterest">
+          <ScalarProperty Name="PointofInterestID" ColumnName="PointofInterestID" />
+          <ScalarProperty Name="ReferenceCode" ColumnName="ReferenceCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Document" ColumnName="Document" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="MGRS" ColumnName="MGRS" />
+          <ScalarProperty Name="Elevation" ColumnName="Elevation" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="createUserId" ColumnName="createUserId" />
+          <ScalarProperty Name="lastUpdate" ColumnName="lastUpdate" />
+          <ScalarProperty Name="lastUpdateUserId" ColumnName="lastUpdateUserId" />
+          <ScalarProperty Name="KML" ColumnName="KML" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ranks">
+      <EntityTypeMapping TypeName="AMPS9000Model.Rank">
+        <MappingFragment StoreEntitySet="Ranks">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="rankAbbreviation" ColumnName="rankAbbreviation" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="AMPS9000Model.Region">
+        <MappingFragment StoreEntitySet="Regions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpecialQualifications">
+      <EntityTypeMapping TypeName="AMPS9000Model.SpecialQualification">
+        <MappingFragment StoreEntitySet="SpecialQualifications">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusCodes">
+      <EntityTypeMapping TypeName="AMPS9000Model.StatusCode">
+        <MappingFragment StoreEntitySet="StatusCodes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="displayOrder" ColumnName="displayOrder" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusCodeTypes">
+      <EntityTypeMapping TypeName="AMPS9000Model.StatusCodeType">
+        <MappingFragment StoreEntitySet="StatusCodeTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="AMPS9000Model.Unit">
+        <MappingFragment StoreEntitySet="Units">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+          <ScalarProperty Name="languageCode" ColumnName="languageCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AMPS9000Model.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PersonnelID" ColumnName="PersonnelID" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NatlImageries">
+      <EntityTypeMapping TypeName="AMPS9000Model.NatlImagery">
+        <MappingFragment StoreEntitySet="NatlImagery">
+          <ScalarProperty Name="NatImageryID" ColumnName="NatImageryID" />
+          <ScalarProperty Name="ReferenceCode" ColumnName="ReferenceCode" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="MGRS" ColumnName="MGRS" />
+          <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+          <ScalarProperty Name="NatlImgaryImage" ColumnName="NatlImgaryImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

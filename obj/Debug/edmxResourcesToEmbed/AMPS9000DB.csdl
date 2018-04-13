@@ -1,0 +1,1570 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AMPS9000Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Alert">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Type" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DashboardInd" Type="Boolean" Nullable="false" />
+    <Property Name="AssetID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="AssetType" Type="Int32" />
+    <Property Name="Complete" Type="Boolean" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="createUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AssetType1" Relationship="Self.FK_Alerts_AssetTypes" FromRole="Alerts" ToRole="AssetTypes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Alerts_Users" FromRole="Alerts" ToRole="Users" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_Alerts_Users1" FromRole="Alerts" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="AssetType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Alerts" Relationship="Self.FK_Alerts_AssetTypes" FromRole="AssetTypes" ToRole="Alerts" />
+  </EntityType>
+  <EntityType Name="BranchOfService">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_BranchOfService" FromRole="BranchOfService" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="COCOM">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_Companies" FromRole="Companies" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="DutyPosition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_DutyPositions" FromRole="DutyPositions" ToRole="Personnel" />
+    <NavigationProperty Name="Personnels1" Relationship="Self.FK_Personnel_DutyPositions1" FromRole="DutyPositions" ToRole="Personnel" />
+    <NavigationProperty Name="Personnels2" Relationship="Self.FK_Personnel_DutyPositions2" FromRole="DutyPositions" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="GroundControlSystem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Byte" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IC_ISM_Classifications">
+    <Key>
+      <PropertyRef Name="ClassificationMarkingValue" />
+    </Key>
+    <Property Name="ClassificationMarkingValue" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IntelRequests" Relationship="Self.FK_IntelRequests_IC_ISM_Classifications" FromRole="IC_ISM_Classifications" ToRole="IntelRequests" />
+  </EntityType>
+  <EntityType Name="IntelReqStatu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IntelRequestID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="StatusDateTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="IntelRequest" Relationship="Self.FK_IntelReqStatus_IntelRequests" FromRole="IntelReqStatus" ToRole="IntelRequests" />
+    <NavigationProperty Name="StatusCode" Relationship="Self.FK_IntelReqStatus_StatusCodes" FromRole="IntelReqStatus" ToRole="StatusCodes" />
+  </EntityType>
+  <EntityType Name="IntelRequest">
+    <Key>
+      <PropertyRef Name="IntelRequestID" />
+    </Key>
+    <Property Name="IntelRequestID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OrignatedDateTime" Type="DateTime" Precision="3" />
+    <Property Name="OrginatorPersonnelID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="AreaOfOperations" Type="Int32" />
+    <Property Name="SupportedCommand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SupportedUnit" Type="Int32" />
+    <Property Name="NamedOperation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MissionType" Type="Int32" />
+    <Property Name="SubMissionType" Type="Int32" />
+    <Property Name="ActiveDateTimeStart" Type="DateTime" Precision="3" />
+    <Property Name="ActiveDateTimeEnd" Type="DateTime" Precision="3" />
+    <Property Name="BestCollectionTime" Type="DateTime" Precision="3" />
+    <Property Name="LatestTimeIntelValue" Type="DateTime" Precision="3" />
+    <Property Name="PriorityIntelRequirement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SpecialInstructions" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="PrimaryPayload" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="SecondaryPayload" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="Armed" Type="Boolean" />
+    <Property Name="PointofContact" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="ReportClassification" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="LIMIDSRequest" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IC_ISM_Classifications" Relationship="Self.FK_IntelRequests_IC_ISM_Classifications" FromRole="IntelRequests" ToRole="IC_ISM_Classifications" />
+    <NavigationProperty Name="IntelReqStatus" Relationship="Self.FK_IntelReqStatus_IntelRequests" FromRole="IntelRequests" ToRole="IntelReqStatus" />
+    <NavigationProperty Name="MissionType1" Relationship="Self.FK_IntelRequests_MissionType" FromRole="IntelRequests" ToRole="MissionType" />
+    <NavigationProperty Name="MissionType2" Relationship="Self.FK_IntelRequests_MissionType1" FromRole="IntelRequests" ToRole="MissionType" />
+    <NavigationProperty Name="Payload" Relationship="Self.FK_IntelRequests_Payloads" FromRole="IntelRequests" ToRole="Payloads" />
+    <NavigationProperty Name="Payload1" Relationship="Self.FK_IntelRequests_Payloads1" FromRole="IntelRequests" ToRole="Payloads" />
+    <NavigationProperty Name="Personnel" Relationship="Self.FK_IntelRequests_Personnel" FromRole="IntelRequests" ToRole="Personnel" />
+    <NavigationProperty Name="Personnel1" Relationship="Self.FK_IntelRequests_Personnel1" FromRole="IntelRequests" ToRole="Personnel" />
+    <NavigationProperty Name="Unit" Relationship="Self.FK_IntelRequests_Units" FromRole="IntelRequests" ToRole="Units" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="LocationID" />
+    </Key>
+    <Property Name="LocationID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LocationReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LocationDocument" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LocationMapImage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="LocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationStreet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationPostalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="LocationCountry" Type="Int32" />
+    <Property Name="LocationCOCOM" Type="Int32" />
+    <Property Name="LocationRegion" Type="Int32" />
+    <Property Name="LocationLatitude" Type="Geography" />
+    <Property Name="LocationLongitude" Type="Geography" />
+    <Property Name="LocationMGRS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LocationElevation" Type="Int32" />
+    <Property Name="LocationPointofContact" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="LocationFrequency" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="KML" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MissionType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IntelRequests" Relationship="Self.FK_IntelRequests_MissionType" FromRole="MissionType" ToRole="IntelRequests" />
+    <NavigationProperty Name="IntelRequests1" Relationship="Self.FK_IntelRequests_MissionType1" FromRole="MissionType" ToRole="IntelRequests" />
+  </EntityType>
+  <EntityType Name="MOS_Desc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Byte" />
+    <Property Name="MOSCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Munitions" Relationship="Self.FK_Munitions_MOS_Desc" FromRole="MOS_Desc" ToRole="Munitions" />
+    <NavigationProperty Name="Munitions1" Relationship="Self.FK_Munitions_MOS_Desc1" FromRole="MOS_Desc" ToRole="Munitions" />
+    <NavigationProperty Name="Munitions2" Relationship="Self.FK_Munitions_MOS_Desc2" FromRole="MOS_Desc" ToRole="Munitions" />
+    <NavigationProperty Name="Payloads" Relationship="Self.FK_Payloads_MOS_Desc" FromRole="MOS_Desc" ToRole="Payloads" />
+    <NavigationProperty Name="Payloads1" Relationship="Self.FK_Payloads_MOS_Desc1" FromRole="MOS_Desc" ToRole="Payloads" />
+    <NavigationProperty Name="Payloads2" Relationship="Self.FK_Payloads_MOS_Desc2" FromRole="MOS_Desc" ToRole="Payloads" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_MOS_Desc" FromRole="MOS_Desc" ToRole="Personnel" />
+    <NavigationProperty Name="Personnels1" Relationship="Self.FK_Personnel_MOS_Desc1" FromRole="MOS_Desc" ToRole="Personnel" />
+    <NavigationProperty Name="Personnels2" Relationship="Self.FK_Personnel_MOS_Desc2" FromRole="MOS_Desc" ToRole="Personnel" />
+    <NavigationProperty Name="Platforms" Relationship="Self.FK_Platforms_MOS_Desc" FromRole="MOS_Desc" ToRole="Platforms" />
+    <NavigationProperty Name="Platforms1" Relationship="Self.FK_Platforms_MOS_Desc1" FromRole="MOS_Desc" ToRole="Platforms" />
+    <NavigationProperty Name="Platforms2" Relationship="Self.FK_Platforms_MOS_Desc2" FromRole="MOS_Desc" ToRole="Platforms" />
+    <NavigationProperty Name="Platforms3" Relationship="Self.FK_Platforms_MOS_Desc3" FromRole="MOS_Desc" ToRole="Platforms" />
+  </EntityType>
+  <EntityType Name="MunitionRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Byte" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Munitions" Relationship="Self.FK_Munitions_MunitionRoles" FromRole="MunitionRoles" ToRole="Munitions" />
+  </EntityType>
+  <EntityType Name="Munition">
+    <Key>
+      <PropertyRef Name="MunitionID" />
+    </Key>
+    <Property Name="MunitionID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MunitionsReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionWireframe" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Munition3D" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionIcon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Munition2525B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionDatasheet" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionNomenclature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionRole" Type="Int32" />
+    <Property Name="MunitionManufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionExecutiveAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionContractProgram" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionCost" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="MunitionCostNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionLength" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MunitionWidthDiameter" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MunitionWeight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MunitionWingspan" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="MunitionWarhead" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionEngine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionRange" Type="Int32" />
+    <Property Name="MunitionSpeed" Type="Int32" />
+    <Property Name="MunitionGuideanceSys" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionLaunchPlatform" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionWeatherRestriction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MunitionCrewCount" Type="Int32" />
+    <Property Name="MunitionMOS1" Type="Int32" />
+    <Property Name="MunitionMOS2" Type="Int32" />
+    <Property Name="MunitionMOS3" Type="Int32" />
+    <NavigationProperty Name="MOS_Desc" Relationship="Self.FK_Munitions_MOS_Desc" FromRole="Munitions" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc1" Relationship="Self.FK_Munitions_MOS_Desc1" FromRole="Munitions" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc2" Relationship="Self.FK_Munitions_MOS_Desc2" FromRole="Munitions" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MunitionRole1" Relationship="Self.FK_Munitions_MunitionRoles" FromRole="Munitions" ToRole="MunitionRoles" />
+  </EntityType>
+  <EntityType Name="MunitionStatu">
+    <Key>
+      <PropertyRef Name="MunitionID" />
+    </Key>
+    <Property Name="MunitionID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusCode" Type="Int32" Nullable="false" />
+    <Property Name="StatusComments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="ETIC" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="StatusCode1" Relationship="Self.FK_MunitionStatus_StatusCodes" FromRole="MunitionStatus" ToRole="StatusCodes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_MunitionStatus_Users" FromRole="MunitionStatus" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="OperationArea">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OrderNumber" Type="Int32" />
+    <Property Name="OrderRelFTN" Type="Int32" />
+    <Property Name="OrderIssued" Type="DateTime" Precision="3" />
+    <Property Name="OrderStart" Type="DateTime" Precision="3" />
+    <Property Name="OrderEnd" Type="DateTime" Precision="3" />
+    <Property Name="OrderType" Type="Int32" />
+    <Property Name="OrderMission" Type="Int32" />
+    <Property Name="ServiceBranch" Type="Int32" />
+    <Property Name="Unit" Type="Int32" />
+    <Property Name="OrderSubCMD1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrderSubCMD2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrderNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="OrderLegacyDoc" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrderType1" Relationship="Self.FK_Orders_OrderTypes" FromRole="Orders" ToRole="OrderTypes" />
+  </EntityType>
+  <EntityType Name="OrderType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderTypes" FromRole="OrderTypes" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="PayGrade">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GradeType" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PayGrade1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DisplayText" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Byte" Nullable="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_PayGrades" FromRole="PayGrades" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="PayloadRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Payloads" Relationship="Self.FK_Payloads_PayloadRoles" FromRole="PayloadRoles" ToRole="Payloads" />
+  </EntityType>
+  <EntityType Name="Payload">
+    <Key>
+      <PropertyRef Name="PayloadID" />
+    </Key>
+    <Property Name="PayloadID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PayloadReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PaylodWireframe" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Payload3D" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadIcon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Payload2525B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadDatasheet" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadNomenclature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadRole" Type="Int32" />
+    <Property Name="PayloadManufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadExecutiveAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadContractProgram" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadCost" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="PayloadCostNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadLength" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PayloadWidth" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="PayloadHeight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PayloadWeight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PayloadPower" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PayloadConnector1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadConnector2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayloadDaySpotter" Type="Boolean" />
+    <Property Name="PayloadThermalImager" Type="Boolean" />
+    <Property Name="PayloadLaserDesginator" Type="Boolean" />
+    <Property Name="PayloadContinuousZoom" Type="Boolean" />
+    <Property Name="PayloadStabalization" Type="Boolean" />
+    <Property Name="PayloadVibrationIsolation" Type="Boolean" />
+    <Property Name="PayloadAutoTracker" Type="Boolean" />
+    <Property Name="PayloadGPSTimeSync" Type="Boolean" />
+    <Property Name="PayloadInternalGPS" Type="Boolean" />
+    <Property Name="PayloadInternalINS" Type="Boolean" />
+    <Property Name="PayloadMetadata" Type="Boolean" />
+    <Property Name="PayloadCrewCount" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PayloadMOS1" Type="Int32" />
+    <Property Name="PayloadMOS2" Type="Int32" />
+    <Property Name="PayloadMOS3" Type="Int32" />
+    <NavigationProperty Name="IntelRequests" Relationship="Self.FK_IntelRequests_Payloads" FromRole="Payloads" ToRole="IntelRequests" />
+    <NavigationProperty Name="IntelRequests1" Relationship="Self.FK_IntelRequests_Payloads1" FromRole="Payloads" ToRole="IntelRequests" />
+    <NavigationProperty Name="MOS_Desc" Relationship="Self.FK_Payloads_MOS_Desc" FromRole="Payloads" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc1" Relationship="Self.FK_Payloads_MOS_Desc1" FromRole="Payloads" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc2" Relationship="Self.FK_Payloads_MOS_Desc2" FromRole="Payloads" ToRole="MOS_Desc" />
+    <NavigationProperty Name="PayloadRole1" Relationship="Self.FK_Payloads_PayloadRoles" FromRole="Payloads" ToRole="PayloadRoles" />
+    <NavigationProperty Name="Platforms" Relationship="Self.FK_Platforms_Payloads" FromRole="Payloads" ToRole="Platforms" />
+    <NavigationProperty Name="Platforms1" Relationship="Self.FK_Platforms_Payloads1" FromRole="Payloads" ToRole="Platforms" />
+    <NavigationProperty Name="Platforms2" Relationship="Self.FK_Platforms_Payloads2" FromRole="Payloads" ToRole="Platforms" />
+  </EntityType>
+  <EntityType Name="PEDPersonnel">
+    <Key>
+      <PropertyRef Name="PEDID" />
+      <PropertyRef Name="PersonnelID" />
+    </Key>
+    <Property Name="PEDID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PersonnelID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AssignmentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PEDTeam" Relationship="Self.FK_PEDPersonnel_PEDTeams" FromRole="PEDPersonnel" ToRole="PEDTeams" />
+    <NavigationProperty Name="Personnel" Relationship="Self.FK_PEDPersonnel_Personnel" FromRole="PEDPersonnel" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="PEDTeam">
+    <Key>
+      <PropertyRef Name="PEDID" />
+    </Key>
+    <Property Name="PEDID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TypeCode" Type="Int32" Nullable="false" />
+    <Property Name="StatusCode" Type="Int32" Nullable="false" />
+    <Property Name="StatusDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusComments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="lastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PEDPersonnels" Relationship="Self.FK_PEDPersonnel_PEDTeams" FromRole="PEDTeams" ToRole="PEDPersonnel" />
+    <NavigationProperty Name="PEDType" Relationship="Self.FK_PEDTeams_PEDTypes" FromRole="PEDTeams" ToRole="PEDTypes" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PEDTeams_Users" FromRole="PEDTeams" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="PEDType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PEDTeams" Relationship="Self.FK_PEDTeams_PEDTypes" FromRole="PEDTypes" ToRole="PEDTeams" />
+  </EntityType>
+  <EntityType Name="Personnel">
+    <Key>
+      <PropertyRef Name="PersonnelID" />
+    </Key>
+    <Property Name="PersonnelID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PersonnelReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PersonnelPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleInitial" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayGrade" Type="Int32" />
+    <Property Name="Rank" Type="Int32" />
+    <Property Name="Nationality" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="Clearance" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="CACid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CallSign" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ServiceBranch" Type="Int32" />
+    <Property Name="Company" Type="Int32" />
+    <Property Name="AssignedUnit" Type="Int32" />
+    <Property Name="DeployedUnit" Type="Int32" />
+    <Property Name="MOS1" Type="Int32" />
+    <Property Name="MOS2" Type="Int32" />
+    <Property Name="MOS3" Type="Int32" />
+    <Property Name="DutyPosition1" Type="Int32" />
+    <Property Name="DutyPosition2" Type="Int32" />
+    <Property Name="DutyPosition3" Type="Int32" />
+    <Property Name="SpecialQuals1" Type="Int32" />
+    <Property Name="SpecialQuals2" Type="Int32" />
+    <Property Name="SpecialQuals3" Type="Int32" />
+    <Property Name="CurrentAssignmentStart" Type="DateTime" Precision="0" />
+    <Property Name="CurrentAssignmentEnd" Type="DateTime" Precision="0" />
+    <Property Name="DSN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailNIPR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmailSIPR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ChatID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BranchOfService" Relationship="Self.FK_Personnel_BranchOfService" FromRole="Personnel" ToRole="BranchOfService" />
+    <NavigationProperty Name="Company1" Relationship="Self.FK_Personnel_Companies" FromRole="Personnel" ToRole="Companies" />
+    <NavigationProperty Name="DutyPosition" Relationship="Self.FK_Personnel_DutyPositions" FromRole="Personnel" ToRole="DutyPositions" />
+    <NavigationProperty Name="DutyPosition4" Relationship="Self.FK_Personnel_DutyPositions1" FromRole="Personnel" ToRole="DutyPositions" />
+    <NavigationProperty Name="DutyPosition5" Relationship="Self.FK_Personnel_DutyPositions2" FromRole="Personnel" ToRole="DutyPositions" />
+    <NavigationProperty Name="IntelRequests" Relationship="Self.FK_IntelRequests_Personnel" FromRole="Personnel" ToRole="IntelRequests" />
+    <NavigationProperty Name="IntelRequests1" Relationship="Self.FK_IntelRequests_Personnel1" FromRole="Personnel" ToRole="IntelRequests" />
+    <NavigationProperty Name="MOS_Desc" Relationship="Self.FK_Personnel_MOS_Desc" FromRole="Personnel" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc1" Relationship="Self.FK_Personnel_MOS_Desc1" FromRole="Personnel" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc2" Relationship="Self.FK_Personnel_MOS_Desc2" FromRole="Personnel" ToRole="MOS_Desc" />
+    <NavigationProperty Name="PayGrade1" Relationship="Self.FK_Personnel_PayGrades" FromRole="Personnel" ToRole="PayGrades" />
+    <NavigationProperty Name="PEDPersonnels" Relationship="Self.FK_PEDPersonnel_Personnel" FromRole="Personnel" ToRole="PEDPersonnel" />
+    <NavigationProperty Name="Rank1" Relationship="Self.FK_Personnel_Ranks" FromRole="Personnel" ToRole="Ranks" />
+    <NavigationProperty Name="Unit" Relationship="Self.FK_Personnel_Units" FromRole="Personnel" ToRole="Units" />
+    <NavigationProperty Name="Unit1" Relationship="Self.FK_Personnel_Units1" FromRole="Personnel" ToRole="Units" />
+    <NavigationProperty Name="PersonnelStatu" Relationship="Self.FK_PersonnelStatus_Personnel" FromRole="Personnel" ToRole="PersonnelStatus" />
+  </EntityType>
+  <EntityType Name="PersonnelStatu">
+    <Key>
+      <PropertyRef Name="PersonnelID" />
+    </Key>
+    <Property Name="PersonnelID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusCode" Type="Int32" Nullable="false" />
+    <Property Name="PersonnelArrive" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PersonnelDepart" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PersonnelRemarks" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="lastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Personnel" Relationship="Self.FK_PersonnelStatus_Personnel" FromRole="PersonnelStatus" ToRole="Personnel" />
+    <NavigationProperty Name="User" Relationship="Self.FK_PersonnelStatus_Users" FromRole="PersonnelStatus" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="PlatformCategory">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Platforms" Relationship="Self.FK_Platforms_PlatformCategories" FromRole="PlatformCategories" ToRole="Platforms" />
+  </EntityType>
+  <EntityType Name="PlatformRole">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Platforms" Relationship="Self.FK_Platforms_PlatformRoles" FromRole="PlatformRoles" ToRole="Platforms" />
+  </EntityType>
+  <EntityType Name="Platform">
+    <Key>
+      <PropertyRef Name="PlatformID" />
+    </Key>
+    <Property Name="PlatformID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PlatformWireframe" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformPhoto" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Platform3D" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformIcon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Platform2525B" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformDatasheet" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformTailNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformNomenclature" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformCategory" Type="Int32" />
+    <Property Name="PlatformService" Type="Int32" />
+    <Property Name="PlatformRole" Type="Int32" />
+    <Property Name="PlatformManufacturer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformExecutiveAgent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformContractProgram" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformCost" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="PlatformCostNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="PlatformIOCDate" Type="DateTime" Precision="0" />
+    <Property Name="PlatformGroundStation" Type="Int32" />
+    <Property Name="PlatformLength" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PlatformWingspan" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PlatformHeight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PlatformWeight" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PlatformPowerPlant" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformFuelCapacity" Type="Int32" />
+    <Property Name="PlatformCruisingSpeed" Type="Int32" />
+    <Property Name="PlatformRange" Type="Int32" />
+    <Property Name="PlatformCeiling" Type="Int32" />
+    <Property Name="PlatformMaxTakeOff" Type="Int32" />
+    <Property Name="PlatformMinRunway" Type="Int32" />
+    <Property Name="PlatformPayloadCapacity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PlatformPayloadCount" Type="Int32" />
+    <Property Name="PlatformPayload1" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformPayload2" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformPayload3" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformArmamentCapacity" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PlatformArmamentCount" Type="Int32" />
+    <Property Name="PlatformArmament1" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformArmament2" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformArmament3" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformComs1" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformComs2" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="PlatformFlightCrewReq" Type="Int32" />
+    <Property Name="PlatformLineCrewReq" Type="Int32" />
+    <Property Name="PlatformPayloadCrewReq" Type="Int32" />
+    <Property Name="PlatformPEDCrewReq" Type="Int32" />
+    <Property Name="PlatformFlightCrewMOS" Type="Int32" />
+    <Property Name="PlatformLineCrewMOS" Type="Int32" />
+    <Property Name="PlatformPayloadCrewMOS" Type="Int32" />
+    <Property Name="PlatformPEDCrewMOS" Type="Int32" />
+    <NavigationProperty Name="MOS_Desc" Relationship="Self.FK_Platforms_MOS_Desc" FromRole="Platforms" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc1" Relationship="Self.FK_Platforms_MOS_Desc1" FromRole="Platforms" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc2" Relationship="Self.FK_Platforms_MOS_Desc2" FromRole="Platforms" ToRole="MOS_Desc" />
+    <NavigationProperty Name="MOS_Desc3" Relationship="Self.FK_Platforms_MOS_Desc3" FromRole="Platforms" ToRole="MOS_Desc" />
+    <NavigationProperty Name="Payload" Relationship="Self.FK_Platforms_Payloads" FromRole="Platforms" ToRole="Payloads" />
+    <NavigationProperty Name="Payload1" Relationship="Self.FK_Platforms_Payloads1" FromRole="Platforms" ToRole="Payloads" />
+    <NavigationProperty Name="Payload2" Relationship="Self.FK_Platforms_Payloads2" FromRole="Platforms" ToRole="Payloads" />
+    <NavigationProperty Name="PlatformCategory1" Relationship="Self.FK_Platforms_PlatformCategories" FromRole="Platforms" ToRole="PlatformCategories" />
+    <NavigationProperty Name="PlatformRole1" Relationship="Self.FK_Platforms_PlatformRoles" FromRole="Platforms" ToRole="PlatformRoles" />
+  </EntityType>
+  <EntityType Name="PlatformStatu">
+    <Key>
+      <PropertyRef Name="PlatformID" />
+    </Key>
+    <Property Name="PlatformID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusCode" Type="Int32" Nullable="false" />
+    <Property Name="StatusComments" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="ETIC" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PointsofInterest">
+    <Key>
+      <PropertyRef Name="PointofInterestID" />
+    </Key>
+    <Property Name="PointofInterestID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReferenceCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Document" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Latitude" Type="Geography" />
+    <Property Name="Longitude" Type="Geography" />
+    <Property Name="MGRS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Elevation" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="createUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="lastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="lastUpdateUserId" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="KML" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Rank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" Nullable="false" />
+    <Property Name="rankAbbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_Ranks" FromRole="Ranks" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="SpecialQualification">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StatusCode">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="displayOrder" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="type" Type="Int32" Nullable="false" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IntelReqStatus" Relationship="Self.FK_IntelReqStatus_StatusCodes" FromRole="StatusCodes" ToRole="IntelReqStatus" />
+    <NavigationProperty Name="MunitionStatus" Relationship="Self.FK_MunitionStatus_StatusCodes" FromRole="StatusCodes" ToRole="MunitionStatus" />
+    <NavigationProperty Name="StatusCodeType" Relationship="Self.FK_StatusCodes_StatusCodeTypes" FromRole="StatusCodes" ToRole="StatusCodeTypes" />
+  </EntityType>
+  <EntityType Name="StatusCodeType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="StatusCodes" Relationship="Self.FK_StatusCodes_StatusCodeTypes" FromRole="StatusCodeTypes" ToRole="StatusCodes" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DisplayOrder" Type="Int32" />
+    <Property Name="languageCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="IntelRequests" Relationship="Self.FK_IntelRequests_Units" FromRole="Units" ToRole="IntelRequests" />
+    <NavigationProperty Name="Personnels" Relationship="Self.FK_Personnel_Units" FromRole="Units" ToRole="Personnel" />
+    <NavigationProperty Name="Personnels1" Relationship="Self.FK_Personnel_Units1" FromRole="Units" ToRole="Personnel" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PersonnelID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Alerts" Relationship="Self.FK_Alerts_Users" FromRole="Users" ToRole="Alerts" />
+    <NavigationProperty Name="Alerts1" Relationship="Self.FK_Alerts_Users1" FromRole="Users" ToRole="Alerts" />
+    <NavigationProperty Name="MunitionStatus" Relationship="Self.FK_MunitionStatus_Users" FromRole="Users" ToRole="MunitionStatus" />
+    <NavigationProperty Name="PEDTeams" Relationship="Self.FK_PEDTeams_Users" FromRole="Users" ToRole="PEDTeams" />
+    <NavigationProperty Name="PersonnelStatus" Relationship="Self.FK_PersonnelStatus_Users" FromRole="Users" ToRole="PersonnelStatus" />
+  </EntityType>
+  <EntityType Name="NatlImagery">
+    <Key>
+      <PropertyRef Name="NatImageryID" />
+      <PropertyRef Name="CreateDateTime" />
+      <PropertyRef Name="NatlImgaryImage" />
+    </Key>
+    <Property Name="NatImageryID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReferenceCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Latitude" Type="Geography" />
+    <Property Name="Longitude" Type="Geography" />
+    <Property Name="MGRS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NatlImgaryImage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Alerts_AssetTypes">
+    <End Role="AssetTypes" Type="Self.AssetType" Multiplicity="0..1" />
+    <End Role="Alerts" Type="Self.Alert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Alerts">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Alerts_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="Alerts" Type="Self.Alert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Alerts">
+        <PropertyRef Name="createUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Alerts_Users1">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Alerts" Type="Self.Alert" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Alerts">
+        <PropertyRef Name="lastUpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_BranchOfService">
+    <End Role="BranchOfService" Type="Self.BranchOfService" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BranchOfService">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="ServiceBranch" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_Companies">
+    <End Role="Companies" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="Company" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_DutyPositions">
+    <End Role="DutyPositions" Type="Self.DutyPosition" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DutyPositions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="DutyPosition1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_DutyPositions1">
+    <End Role="DutyPositions" Type="Self.DutyPosition" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DutyPositions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="DutyPosition2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_DutyPositions2">
+    <End Role="DutyPositions" Type="Self.DutyPosition" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DutyPositions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="DutyPosition3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_IC_ISM_Classifications">
+    <End Role="IC_ISM_Classifications" Type="Self.IC_ISM_Classifications" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IC_ISM_Classifications">
+        <PropertyRef Name="ClassificationMarkingValue" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="ReportClassification" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelReqStatus_IntelRequests">
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="1" />
+    <End Role="IntelReqStatus" Type="Self.IntelReqStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IntelRequests">
+        <PropertyRef Name="IntelRequestID" />
+      </Principal>
+      <Dependent Role="IntelReqStatus">
+        <PropertyRef Name="IntelRequestID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelReqStatus_StatusCodes">
+    <End Role="StatusCodes" Type="Self.StatusCode" Multiplicity="0..1" />
+    <End Role="IntelReqStatus" Type="Self.IntelReqStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusCodes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="IntelReqStatus">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_MissionType">
+    <End Role="MissionType" Type="Self.MissionType" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MissionType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="MissionType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_MissionType1">
+    <End Role="MissionType" Type="Self.MissionType" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MissionType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="SubMissionType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_Payloads">
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payloads">
+        <PropertyRef Name="PayloadID" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="PrimaryPayload" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_Payloads1">
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payloads">
+        <PropertyRef Name="PayloadID" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="SecondaryPayload" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_Personnel">
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="PersonnelID" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="OrginatorPersonnelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_Personnel1">
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="PersonnelID" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="PointofContact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IntelRequests_Units">
+    <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="IntelRequests" Type="Self.IntelRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="IntelRequests">
+        <PropertyRef Name="SupportedUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Munitions_MOS_Desc">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Munitions" Type="Self.Munition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Munitions">
+        <PropertyRef Name="MunitionMOS1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Munitions_MOS_Desc1">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Munitions" Type="Self.Munition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Munitions">
+        <PropertyRef Name="MunitionMOS2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Munitions_MOS_Desc2">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Munitions" Type="Self.Munition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Munitions">
+        <PropertyRef Name="MunitionMOS3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payloads_MOS_Desc">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payloads">
+        <PropertyRef Name="PayloadMOS1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payloads_MOS_Desc1">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payloads">
+        <PropertyRef Name="PayloadMOS2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payloads_MOS_Desc2">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payloads">
+        <PropertyRef Name="PayloadMOS3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_MOS_Desc">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="MOS1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_MOS_Desc1">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="MOS2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_MOS_Desc2">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="MOS3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_MOS_Desc">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformFlightCrewMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_MOS_Desc1">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformLineCrewMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_MOS_Desc2">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformPayloadCrewMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_MOS_Desc3">
+    <End Role="MOS_Desc" Type="Self.MOS_Desc" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MOS_Desc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformPEDCrewMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Munitions_MunitionRoles">
+    <End Role="MunitionRoles" Type="Self.MunitionRole" Multiplicity="0..1" />
+    <End Role="Munitions" Type="Self.Munition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MunitionRoles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Munitions">
+        <PropertyRef Name="MunitionRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MunitionStatus_StatusCodes">
+    <End Role="StatusCodes" Type="Self.StatusCode" Multiplicity="1" />
+    <End Role="MunitionStatus" Type="Self.MunitionStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusCodes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MunitionStatus">
+        <PropertyRef Name="StatusCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MunitionStatus_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="MunitionStatus" Type="Self.MunitionStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MunitionStatus">
+        <PropertyRef Name="lastUpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_OrderTypes">
+    <End Role="OrderTypes" Type="Self.OrderType" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="OrderType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_PayGrades">
+    <End Role="PayGrades" Type="Self.PayGrade" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayGrades">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="PayGrade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payloads_PayloadRoles">
+    <End Role="PayloadRoles" Type="Self.PayloadRole" Multiplicity="0..1" />
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayloadRoles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Payloads">
+        <PropertyRef Name="PayloadRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_Payloads">
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payloads">
+        <PropertyRef Name="PayloadID" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformPayload1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_Payloads1">
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payloads">
+        <PropertyRef Name="PayloadID" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformPayload2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_Payloads2">
+    <End Role="Payloads" Type="Self.Payload" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payloads">
+        <PropertyRef Name="PayloadID" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformPayload3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDPersonnel_PEDTeams">
+    <End Role="PEDTeams" Type="Self.PEDTeam" Multiplicity="1" />
+    <End Role="PEDPersonnel" Type="Self.PEDPersonnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDTeams">
+        <PropertyRef Name="PEDID" />
+      </Principal>
+      <Dependent Role="PEDPersonnel">
+        <PropertyRef Name="PEDID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDPersonnel_Personnel">
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="1" />
+    <End Role="PEDPersonnel" Type="Self.PEDPersonnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="PersonnelID" />
+      </Principal>
+      <Dependent Role="PEDPersonnel">
+        <PropertyRef Name="PersonnelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDTeams_PEDTypes">
+    <End Role="PEDTypes" Type="Self.PEDType" Multiplicity="1" />
+    <End Role="PEDTeams" Type="Self.PEDTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PEDTeams">
+        <PropertyRef Name="TypeCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PEDTeams_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="PEDTeams" Type="Self.PEDTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PEDTeams">
+        <PropertyRef Name="lastUpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_Ranks">
+    <End Role="Ranks" Type="Self.Rank" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ranks">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="Rank" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_Units">
+    <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="DeployedUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personnel_Units1">
+    <End Role="Units" Type="Self.Unit" Multiplicity="0..1" />
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Units">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Personnel">
+        <PropertyRef Name="AssignedUnit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonnelStatus_Personnel">
+    <End Role="Personnel" Type="Self.Personnel" Multiplicity="1" />
+    <End Role="PersonnelStatus" Type="Self.PersonnelStatu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Personnel">
+        <PropertyRef Name="PersonnelID" />
+      </Principal>
+      <Dependent Role="PersonnelStatus">
+        <PropertyRef Name="PersonnelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PersonnelStatus_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="PersonnelStatus" Type="Self.PersonnelStatu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PersonnelStatus">
+        <PropertyRef Name="lastUpdateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_PlatformCategories">
+    <End Role="PlatformCategories" Type="Self.PlatformCategory" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatformCategories">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platforms_PlatformRoles">
+    <End Role="PlatformRoles" Type="Self.PlatformRole" Multiplicity="0..1" />
+    <End Role="Platforms" Type="Self.Platform" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatformRoles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Platforms">
+        <PropertyRef Name="PlatformRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatusCodes_StatusCodeTypes">
+    <End Role="StatusCodeTypes" Type="Self.StatusCodeType" Multiplicity="1" />
+    <End Role="StatusCodes" Type="Self.StatusCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusCodeTypes">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="StatusCodes">
+        <PropertyRef Name="type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AMPS9000Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Alerts" EntityType="Self.Alert" />
+    <EntitySet Name="AssetTypes" EntityType="Self.AssetType" />
+    <EntitySet Name="BranchOfServices" EntityType="Self.BranchOfService" />
+    <EntitySet Name="COCOMs" EntityType="Self.COCOM" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="DutyPositions" EntityType="Self.DutyPosition" />
+    <EntitySet Name="GroundControlSystems" EntityType="Self.GroundControlSystem" />
+    <EntitySet Name="IC_ISM_Classifications" EntityType="Self.IC_ISM_Classifications" />
+    <EntitySet Name="IntelReqStatus" EntityType="Self.IntelReqStatu" />
+    <EntitySet Name="IntelRequests" EntityType="Self.IntelRequest" />
+    <EntitySet Name="Locations" EntityType="Self.Location" />
+    <EntitySet Name="MissionTypes" EntityType="Self.MissionType" />
+    <EntitySet Name="MOS_Desc" EntityType="Self.MOS_Desc" />
+    <EntitySet Name="MunitionRoles" EntityType="Self.MunitionRole" />
+    <EntitySet Name="Munitions" EntityType="Self.Munition" />
+    <EntitySet Name="MunitionStatus" EntityType="Self.MunitionStatu" />
+    <EntitySet Name="OperationAreas" EntityType="Self.OperationArea" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="OrderTypes" EntityType="Self.OrderType" />
+    <EntitySet Name="PayGrades" EntityType="Self.PayGrade" />
+    <EntitySet Name="PayloadRoles" EntityType="Self.PayloadRole" />
+    <EntitySet Name="Payloads" EntityType="Self.Payload" />
+    <EntitySet Name="PEDPersonnels" EntityType="Self.PEDPersonnel" />
+    <EntitySet Name="PEDTeams" EntityType="Self.PEDTeam" />
+    <EntitySet Name="PEDTypes" EntityType="Self.PEDType" />
+    <EntitySet Name="Personnels" EntityType="Self.Personnel" />
+    <EntitySet Name="PersonnelStatus" EntityType="Self.PersonnelStatu" />
+    <EntitySet Name="PlatformCategories" EntityType="Self.PlatformCategory" />
+    <EntitySet Name="PlatformRoles" EntityType="Self.PlatformRole" />
+    <EntitySet Name="Platforms" EntityType="Self.Platform" />
+    <EntitySet Name="PlatformStatus" EntityType="Self.PlatformStatu" />
+    <EntitySet Name="PointsofInterests" EntityType="Self.PointsofInterest" />
+    <EntitySet Name="Ranks" EntityType="Self.Rank" />
+    <EntitySet Name="Regions" EntityType="Self.Region" />
+    <EntitySet Name="SpecialQualifications" EntityType="Self.SpecialQualification" />
+    <EntitySet Name="StatusCodes" EntityType="Self.StatusCode" />
+    <EntitySet Name="StatusCodeTypes" EntityType="Self.StatusCodeType" />
+    <EntitySet Name="Units" EntityType="Self.Unit" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="NatlImageries" EntityType="Self.NatlImagery" />
+    <AssociationSet Name="FK_Alerts_AssetTypes" Association="Self.FK_Alerts_AssetTypes">
+      <End Role="AssetTypes" EntitySet="AssetTypes" />
+      <End Role="Alerts" EntitySet="Alerts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Alerts_Users" Association="Self.FK_Alerts_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Alerts" EntitySet="Alerts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Alerts_Users1" Association="Self.FK_Alerts_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Alerts" EntitySet="Alerts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_BranchOfService" Association="Self.FK_Personnel_BranchOfService">
+      <End Role="BranchOfService" EntitySet="BranchOfServices" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_Companies" Association="Self.FK_Personnel_Companies">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_DutyPositions" Association="Self.FK_Personnel_DutyPositions">
+      <End Role="DutyPositions" EntitySet="DutyPositions" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_DutyPositions1" Association="Self.FK_Personnel_DutyPositions1">
+      <End Role="DutyPositions" EntitySet="DutyPositions" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_DutyPositions2" Association="Self.FK_Personnel_DutyPositions2">
+      <End Role="DutyPositions" EntitySet="DutyPositions" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_IC_ISM_Classifications" Association="Self.FK_IntelRequests_IC_ISM_Classifications">
+      <End Role="IC_ISM_Classifications" EntitySet="IC_ISM_Classifications" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelReqStatus_IntelRequests" Association="Self.FK_IntelReqStatus_IntelRequests">
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+      <End Role="IntelReqStatus" EntitySet="IntelReqStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelReqStatus_StatusCodes" Association="Self.FK_IntelReqStatus_StatusCodes">
+      <End Role="StatusCodes" EntitySet="StatusCodes" />
+      <End Role="IntelReqStatus" EntitySet="IntelReqStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_MissionType" Association="Self.FK_IntelRequests_MissionType">
+      <End Role="MissionType" EntitySet="MissionTypes" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_MissionType1" Association="Self.FK_IntelRequests_MissionType1">
+      <End Role="MissionType" EntitySet="MissionTypes" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_Payloads" Association="Self.FK_IntelRequests_Payloads">
+      <End Role="Payloads" EntitySet="Payloads" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_Payloads1" Association="Self.FK_IntelRequests_Payloads1">
+      <End Role="Payloads" EntitySet="Payloads" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_Personnel" Association="Self.FK_IntelRequests_Personnel">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_Personnel1" Association="Self.FK_IntelRequests_Personnel1">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IntelRequests_Units" Association="Self.FK_IntelRequests_Units">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="IntelRequests" EntitySet="IntelRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Munitions_MOS_Desc" Association="Self.FK_Munitions_MOS_Desc">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Munitions" EntitySet="Munitions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Munitions_MOS_Desc1" Association="Self.FK_Munitions_MOS_Desc1">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Munitions" EntitySet="Munitions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Munitions_MOS_Desc2" Association="Self.FK_Munitions_MOS_Desc2">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Munitions" EntitySet="Munitions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payloads_MOS_Desc" Association="Self.FK_Payloads_MOS_Desc">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Payloads" EntitySet="Payloads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payloads_MOS_Desc1" Association="Self.FK_Payloads_MOS_Desc1">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Payloads" EntitySet="Payloads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payloads_MOS_Desc2" Association="Self.FK_Payloads_MOS_Desc2">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Payloads" EntitySet="Payloads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_MOS_Desc" Association="Self.FK_Personnel_MOS_Desc">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_MOS_Desc1" Association="Self.FK_Personnel_MOS_Desc1">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_MOS_Desc2" Association="Self.FK_Personnel_MOS_Desc2">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_MOS_Desc" Association="Self.FK_Platforms_MOS_Desc">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_MOS_Desc1" Association="Self.FK_Platforms_MOS_Desc1">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_MOS_Desc2" Association="Self.FK_Platforms_MOS_Desc2">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_MOS_Desc3" Association="Self.FK_Platforms_MOS_Desc3">
+      <End Role="MOS_Desc" EntitySet="MOS_Desc" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Munitions_MunitionRoles" Association="Self.FK_Munitions_MunitionRoles">
+      <End Role="MunitionRoles" EntitySet="MunitionRoles" />
+      <End Role="Munitions" EntitySet="Munitions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MunitionStatus_StatusCodes" Association="Self.FK_MunitionStatus_StatusCodes">
+      <End Role="StatusCodes" EntitySet="StatusCodes" />
+      <End Role="MunitionStatus" EntitySet="MunitionStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MunitionStatus_Users" Association="Self.FK_MunitionStatus_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MunitionStatus" EntitySet="MunitionStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_OrderTypes" Association="Self.FK_Orders_OrderTypes">
+      <End Role="OrderTypes" EntitySet="OrderTypes" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_PayGrades" Association="Self.FK_Personnel_PayGrades">
+      <End Role="PayGrades" EntitySet="PayGrades" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payloads_PayloadRoles" Association="Self.FK_Payloads_PayloadRoles">
+      <End Role="PayloadRoles" EntitySet="PayloadRoles" />
+      <End Role="Payloads" EntitySet="Payloads" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_Payloads" Association="Self.FK_Platforms_Payloads">
+      <End Role="Payloads" EntitySet="Payloads" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_Payloads1" Association="Self.FK_Platforms_Payloads1">
+      <End Role="Payloads" EntitySet="Payloads" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_Payloads2" Association="Self.FK_Platforms_Payloads2">
+      <End Role="Payloads" EntitySet="Payloads" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDPersonnel_PEDTeams" Association="Self.FK_PEDPersonnel_PEDTeams">
+      <End Role="PEDTeams" EntitySet="PEDTeams" />
+      <End Role="PEDPersonnel" EntitySet="PEDPersonnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDPersonnel_Personnel" Association="Self.FK_PEDPersonnel_Personnel">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="PEDPersonnel" EntitySet="PEDPersonnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDTeams_PEDTypes" Association="Self.FK_PEDTeams_PEDTypes">
+      <End Role="PEDTypes" EntitySet="PEDTypes" />
+      <End Role="PEDTeams" EntitySet="PEDTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PEDTeams_Users" Association="Self.FK_PEDTeams_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PEDTeams" EntitySet="PEDTeams" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_Ranks" Association="Self.FK_Personnel_Ranks">
+      <End Role="Ranks" EntitySet="Ranks" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_Units" Association="Self.FK_Personnel_Units">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personnel_Units1" Association="Self.FK_Personnel_Units1">
+      <End Role="Units" EntitySet="Units" />
+      <End Role="Personnel" EntitySet="Personnels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonnelStatus_Personnel" Association="Self.FK_PersonnelStatus_Personnel">
+      <End Role="Personnel" EntitySet="Personnels" />
+      <End Role="PersonnelStatus" EntitySet="PersonnelStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PersonnelStatus_Users" Association="Self.FK_PersonnelStatus_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PersonnelStatus" EntitySet="PersonnelStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_PlatformCategories" Association="Self.FK_Platforms_PlatformCategories">
+      <End Role="PlatformCategories" EntitySet="PlatformCategories" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platforms_PlatformRoles" Association="Self.FK_Platforms_PlatformRoles">
+      <End Role="PlatformRoles" EntitySet="PlatformRoles" />
+      <End Role="Platforms" EntitySet="Platforms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatusCodes_StatusCodeTypes" Association="Self.FK_StatusCodes_StatusCodeTypes">
+      <End Role="StatusCodeTypes" EntitySet="StatusCodeTypes" />
+      <End Role="StatusCodes" EntitySet="StatusCodes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
