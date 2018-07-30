@@ -8,6 +8,11 @@ namespace AMPS9000_WebAPI
 
     public partial class Location
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Location()
+        {
+        }
+
         [StringLength(36)]
         public string LocationID { get; set; }
 
@@ -58,5 +63,18 @@ namespace AMPS9000_WebAPI
 
         [StringLength(150)]
         public string KML { get; set; }
+
+        public int? LocationCategory { get; set; }
+
+        [StringLength(75)]
+        public string LocationDescription { get; set; }
+
+        public DateTime? LastUpdate { get; set; }
+
+        [StringLength(50)]
+        public string LocationNai { get; set; }
+
+        public virtual LocationCategory LocationCategory1 { get; set; }
+
     }
 }

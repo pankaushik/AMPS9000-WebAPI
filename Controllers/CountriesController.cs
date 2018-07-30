@@ -21,7 +21,7 @@ namespace AMPS9000_WebAPI.Controllers
         public IQueryable<DropDownDTO> GetCountries()
         {
             var result = (from a in db.Countries
-                          orderby a.description ascending
+                          orderby a.displayOrder, a.description
                           select new DropDownDTO { id = a.id.ToString(), description = a.description.Trim() }).AsQueryable();
             return result;
         }

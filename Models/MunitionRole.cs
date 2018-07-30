@@ -11,7 +11,6 @@ namespace AMPS9000_WebAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MunitionRole()
         {
-            Munitions = new HashSet<Munition>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -26,7 +25,5 @@ namespace AMPS9000_WebAPI
         [StringLength(3)]
         public string languageCode { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Munition> Munitions { get; set; }
     }
 }

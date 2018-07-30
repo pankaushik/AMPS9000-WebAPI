@@ -4,20 +4,26 @@ namespace AMPS9000_WebAPI
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     public partial class AMPS9000DB : DbContext
     {
         public AMPS9000DB()
             : base("name=AMPS9000DB")
         {
-            Configuration.LazyLoadingEnabled = false;
         }
 
+        public virtual DbSet<AlertRecipient> AlertRecipients { get; set; }
         public virtual DbSet<Alert> Alerts { get; set; }
+        public virtual DbSet<AlertType> AlertTypes { get; set; }
         public virtual DbSet<AssetType> AssetTypes { get; set; }
+        public virtual DbSet<BranchCommands> BranchCommands { get; set; }
         public virtual DbSet<BranchOfService> BranchOfServices { get; set; }
+        public virtual DbSet<BranchSubordinateTier1> BranchSubordinateTier1 { get; set; }
         public virtual DbSet<COCOM> COCOMs { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CommandRelationships> CommandRelationships { get; set; }
+        public virtual DbSet<ComsType> ComsTypes { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<DutyPosition> DutyPositions { get; set; }
         public virtual DbSet<EEIThreat> EEIThreats { get; set; }
@@ -27,6 +33,7 @@ namespace AMPS9000_WebAPI
         public virtual DbSet<IntelReqStatu> IntelReqStatus { get; set; }
         public virtual DbSet<IntelRequest> IntelRequests { get; set; }
         public virtual DbSet<LIMIDSReq> LIMIDSReqs { get; set; }
+        public virtual DbSet<LocationCategory> LocationCategories { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Manufacturer> Manufacturers { get; set; }
         public virtual DbSet<MapLayerCategory> MapLayerCategories { get; set; }
@@ -40,8 +47,10 @@ namespace AMPS9000_WebAPI
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderType> OrderTypes { get; set; }
         public virtual DbSet<PayGrade> PayGrades { get; set; }
-        public virtual DbSet<PayloadRole> PayloadRoles { get; set; }
         public virtual DbSet<Payload> Payloads { get; set; }
+        public virtual DbSet<PayloadInventory> PayloadInventory { get; set; }
+        public virtual DbSet<PayloadStatu> PayloadStatus { get; set; }
+        public virtual DbSet<PayloadType> PayloadTypes { get; set; }
         public virtual DbSet<PEDPersonnel> PEDPersonnels { get; set; }
         public virtual DbSet<PEDTeam> PEDTeams { get; set; }
         public virtual DbSet<PEDType> PEDTypes { get; set; }
@@ -50,6 +59,7 @@ namespace AMPS9000_WebAPI
         public virtual DbSet<PlatformCategory> PlatformCategories { get; set; }
         public virtual DbSet<PlatformRole> PlatformRoles { get; set; }
         public virtual DbSet<Platform> Platforms { get; set; }
+        public virtual DbSet<PlatformInventory> PlatformInventory { get; set; }
         public virtual DbSet<PlatformStatu> PlatformStatus { get; set; }
         public virtual DbSet<PointsofInterest> PointsofInterests { get; set; }
         public virtual DbSet<RankClassification> RankClassifications { get; set; }
@@ -61,10 +71,20 @@ namespace AMPS9000_WebAPI
         public virtual DbSet<ThreatGroup> ThreatGroups { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<MunitionsLocation> MunitionsLocations { get; set; }
         public virtual DbSet<NatlImagery> NatlImageries { get; set; }
+        public virtual DbSet<MunitionsInventory> MunitionsInventory { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AlertRecipient>()
+                .Property(e => e.id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AlertRecipient>()
+                .Property(e => e.personnelID)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Alert>()
                 .Property(e => e.id)
                 .IsUnicode(false);
@@ -88,6 +108,20 @@ namespace AMPS9000_WebAPI
             modelBuilder.Entity<Alert>()
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Alert>()
+                .Property(e => e.LinkTo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AlertType>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<AlertType>()
+                .HasMany(e => e.Alerts)
+                .WithRequired(e => e.AlertType)
+                .HasForeignKey(e => e.Type)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<AssetType>()
                 .Property(e => e.description)
@@ -136,6 +170,10 @@ namespace AMPS9000_WebAPI
                 .WithOptional(e => e.Company1)
                 .HasForeignKey(e => e.Company);
 
+            modelBuilder.Entity<ComsType>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Country>()
                 .Property(e => e.id)
                 .IsUnicode(false);
@@ -147,6 +185,9 @@ namespace AMPS9000_WebAPI
             modelBuilder.Entity<Country>()
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Country>()
+                .Property(e => e.displayOrder);
 
             modelBuilder.Entity<DutyPosition>()
                 .Property(e => e.description)
@@ -251,10 +292,6 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<IntelRequest>()
-                .Property(e => e.SupportedCommand)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<IntelRequest>()
                 .Property(e => e.NamedOperation)
                 .IsUnicode(false);
 
@@ -296,6 +333,10 @@ namespace AMPS9000_WebAPI
                 .WithRequired(e => e.IntelRequest)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<IntelRequest>()
+                .HasOptional(e => e.IntelRequests1)
+                .WithRequired(e => e.IntelRequest1);
+
             modelBuilder.Entity<LIMIDSReq>()
                 .Property(e => e.description)
                 .IsUnicode(false);
@@ -304,6 +345,15 @@ namespace AMPS9000_WebAPI
                 .HasMany(e => e.IntelReqEEIs)
                 .WithOptional(e => e.LIMIDSReq)
                 .HasForeignKey(e => e.LIMIDS_Req);
+
+            modelBuilder.Entity<LocationCategory>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<LocationCategory>()
+                .HasMany(e => e.Locations)
+                .WithOptional(e => e.LocationCategory1)
+                .HasForeignKey(e => e.LocationCategory);
 
             modelBuilder.Entity<Location>()
                 .Property(e => e.LocationID)
@@ -370,6 +420,14 @@ namespace AMPS9000_WebAPI
                 .Property(e => e.KML)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Location>()
+                .Property(e => e.LocationDescription)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Location>()
+                .Property(e => e.LocationNai)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Manufacturer>()
                 .Property(e => e.description)
                 .IsUnicode(false);
@@ -384,11 +442,11 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<MapLayerCategory>()
-                .Property(e => e.name)
+                .Property(e => e.createUserId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MapLayerCategory>()
-                .Property(e => e.createUserId)
+                .Property(e => e.name)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MapLayer>()
@@ -433,71 +491,6 @@ namespace AMPS9000_WebAPI
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Munitions)
-                .WithOptional(e => e.MOS_Desc)
-                .HasForeignKey(e => e.MunitionMOS1);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Munitions1)
-                .WithOptional(e => e.MOS_Desc1)
-                .HasForeignKey(e => e.MunitionMOS2);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Munitions2)
-                .WithOptional(e => e.MOS_Desc2)
-                .HasForeignKey(e => e.MunitionMOS3);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Payloads)
-                .WithOptional(e => e.MOS_Desc)
-                .HasForeignKey(e => e.PayloadMOS1);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Payloads1)
-                .WithOptional(e => e.MOS_Desc1)
-                .HasForeignKey(e => e.PayloadMOS2);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Payloads2)
-                .WithOptional(e => e.MOS_Desc2)
-                .HasForeignKey(e => e.PayloadMOS3);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Personnels)
-                .WithOptional(e => e.MOS_Desc)
-                .HasForeignKey(e => e.MOS1);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Personnels1)
-                .WithOptional(e => e.MOS_Desc1)
-                .HasForeignKey(e => e.MOS2);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Personnels2)
-                .WithOptional(e => e.MOS_Desc2)
-                .HasForeignKey(e => e.MOS3);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Platforms)
-                .WithOptional(e => e.MOS_Desc)
-                .HasForeignKey(e => e.PlatformFlightCrewMOS);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Platforms1)
-                .WithOptional(e => e.MOS_Desc1)
-                .HasForeignKey(e => e.PlatformLineCrewMOS);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Platforms2)
-                .WithOptional(e => e.MOS_Desc2)
-                .HasForeignKey(e => e.PlatformPayloadCrewMOS);
-
-            modelBuilder.Entity<MOS_Desc>()
-                .HasMany(e => e.Platforms3)
-                .WithOptional(e => e.MOS_Desc3)
-                .HasForeignKey(e => e.PlatformPEDCrewMOS);
-
             modelBuilder.Entity<MunitionRole>()
                 .Property(e => e.description)
                 .IsUnicode(false);
@@ -505,11 +498,6 @@ namespace AMPS9000_WebAPI
             modelBuilder.Entity<MunitionRole>()
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<MunitionRole>()
-                .HasMany(e => e.Munitions)
-                .WithOptional(e => e.MunitionRole1)
-                .HasForeignKey(e => e.MunitionRole);
 
             modelBuilder.Entity<Munition>()
                 .Property(e => e.MunitionID)
@@ -607,8 +595,40 @@ namespace AMPS9000_WebAPI
                 .Property(e => e.MunitionWeatherRestriction)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionHeight)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionWeightUnloaded)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionWeightLoaded)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionProjectileWeight)
+                .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionCaliber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionDriveSystem)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionFeedSystem)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Munition>()
+                .Property(e => e.MunitionMuzzleEnergy)
+                .IsUnicode(false);
+
             modelBuilder.Entity<MunitionStatu>()
-                .Property(e => e.MunitionID)
+                .Property(e => e.MunitionInventoryID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<MunitionStatu>()
@@ -692,18 +712,6 @@ namespace AMPS9000_WebAPI
                 .WithOptional(e => e.PayGrade1)
                 .HasForeignKey(e => e.PayGrade);
 
-            modelBuilder.Entity<PayloadRole>()
-                .Property(e => e.description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PayloadRole>()
-                .Property(e => e.languageCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PayloadRole>()
-                .Property(e => e.roleCode)
-                .IsUnicode(false);
-
             modelBuilder.Entity<Payload>()
                 .Property(e => e.PayloadID)
                 .IsUnicode(false);
@@ -713,7 +721,7 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .Property(e => e.PaylodWireframe)
+                .Property(e => e.PayloadWireframe)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
@@ -745,8 +753,7 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .Property(e => e.PayloadManufacturer)
-                .IsUnicode(false);
+                .Property(e => e.PayloadManufacturer);
 
             modelBuilder.Entity<Payload>()
                 .Property(e => e.PayloadExecutiveAgent)
@@ -797,29 +804,117 @@ namespace AMPS9000_WebAPI
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Payload>()
-                .HasMany(e => e.IntelRequests)
-                .WithOptional(e => e.Payload)
-                .HasForeignKey(e => e.PrimaryPayload);
+                .Property(e => e.PayloadFrequencyRange)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .HasMany(e => e.IntelRequests1)
-                .WithOptional(e => e.Payload1)
-                .HasForeignKey(e => e.SecondaryPayload);
+                .Property(e => e.PayloadScanCoverage)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .HasMany(e => e.Platforms)
-                .WithOptional(e => e.Payload)
-                .HasForeignKey(e => e.PlatformPayload1);
+                .Property(e => e.PayloadMaximumRange)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .HasMany(e => e.Platforms1)
-                .WithOptional(e => e.Payload1)
-                .HasForeignKey(e => e.PlatformPayload2);
+                .Property(e => e.PayloadMapResolution)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Payload>()
-                .HasMany(e => e.Platforms2)
-                .WithOptional(e => e.Payload2)
-                .HasForeignKey(e => e.PlatformPayload3);
+                .Property(e => e.PayloadGroundMapping)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadStripSAR)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadSpotlightSAR)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadCCEOIR)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadGeoReferencing)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadChangeDetect)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadImageResolution)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadRefreshRateEO)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadRefreshRateIR)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadAngularCoverage)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadAreaCoverage)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadVirtualZoom)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Payload>()
+                .Property(e => e.PayloadCrossCueing)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.id);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.metaDataID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.locationID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.serialNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.owningUnit);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.lastUpdate);
+
+            modelBuilder.Entity<PayloadInventory>()
+                .Property(e => e.lastUpdateUserId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadStatu>()
+                .Property(e => e.PayloadInventoryID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadStatu>()
+                .Property(e => e.StatusComments)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadStatu>()
+                .Property(e => e.lastUpdateUserId)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadType>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayloadType>()
+                .Property(e => e.abbreviation)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PEDPersonnel>()
                 .Property(e => e.PEDID)
@@ -947,9 +1042,8 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlatformCategory>()
-                .HasMany(e => e.Platforms)
-                .WithOptional(e => e.PlatformCategory1)
-                .HasForeignKey(e => e.PlatformCategory);
+                .Property(e => e.abbreviation)
+                .IsUnicode(false);
 
             modelBuilder.Entity<PlatformRole>()
                 .Property(e => e.description)
@@ -958,11 +1052,6 @@ namespace AMPS9000_WebAPI
             modelBuilder.Entity<PlatformRole>()
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<PlatformRole>()
-                .HasMany(e => e.Platforms)
-                .WithOptional(e => e.PlatformRole1)
-                .HasForeignKey(e => e.PlatformRole);
 
             modelBuilder.Entity<Platform>()
                 .Property(e => e.PlatformID)
@@ -990,10 +1079,6 @@ namespace AMPS9000_WebAPI
 
             modelBuilder.Entity<Platform>()
                 .Property(e => e.PlatformDatasheet)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformTailNumber)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Platform>()
@@ -1044,44 +1129,66 @@ namespace AMPS9000_WebAPI
                 .Property(e => e.PlatformPayloadCapacity)
                 .HasPrecision(10, 2);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformPayload1)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.id)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformPayload2)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.metaDataID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformPayload3)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.locationID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformArmamentCapacity)
-                .HasPrecision(10, 2);
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.owningUnit);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformArmament1)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.tailNumber)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformArmament2)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.payload1)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformArmament3)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.payload2)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformComs1)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.payload3)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Platform>()
-                .Property(e => e.PlatformComs2)
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.armament1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.armament2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.armament3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.coms1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.coms2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.lastUpdate);
+
+            modelBuilder.Entity<PlatformInventory>()
+                .Property(e => e.lastUpdateUserId)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlatformStatu>()
-                .Property(e => e.PlatformID)
+                .Property(e => e.PlatformInventoryID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PlatformStatu>()
@@ -1228,19 +1335,19 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<Unit>()
-                .HasMany(e => e.IntelRequests)
-                .WithOptional(e => e.Unit)
-                .HasForeignKey(e => e.SupportedUnit);
+                .Property(e => e.HQCity)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Unit>()
-                .HasMany(e => e.Personnels)
-                .WithOptional(e => e.Unit)
-                .HasForeignKey(e => e.DeployedUnit);
+                .Property(e => e.HQStateAbbrev)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Unit>()
-                .HasMany(e => e.Personnels1)
-                .WithOptional(e => e.Unit1)
-                .HasForeignKey(e => e.AssignedUnit);
+                .Property(e => e.HQCountryCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Unit>()
+                .Property(e => e.branchSubordinateTier1ID);
 
             modelBuilder.Entity<User>()
                 .Property(e => e.UserID)
@@ -1259,15 +1366,12 @@ namespace AMPS9000_WebAPI
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Alerts)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.createUserId)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.UnitIdentificationCode)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
-                .HasMany(e => e.Alerts1)
-                .WithOptional(e => e.User1)
-                .HasForeignKey(e => e.lastUpdateUserId);
+                .Property(e => e.PasswordSalt)
+                .IsUnicode(false);
 
             modelBuilder.Entity<User>()
                 .HasMany(e => e.MunitionStatus)
@@ -1281,11 +1385,13 @@ namespace AMPS9000_WebAPI
                 .HasForeignKey(e => e.lastUpdateUserId)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.PersonnelStatus)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.lastUpdateUserId)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<MunitionsLocation>()
+                .Property(e => e.locationID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsLocation>()
+                .Property(e => e.munitionID)
+                .IsUnicode(false);
 
             modelBuilder.Entity<NatlImagery>()
                 .Property(e => e.NatImageryID)
@@ -1305,6 +1411,77 @@ namespace AMPS9000_WebAPI
 
             modelBuilder.Entity<NatlImagery>()
                 .Property(e => e.NatlImgaryImage)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .Property(e => e.abbreviation)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .Property(e => e.HQCity)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .Property(e => e.HQCountryCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .Property(e => e.HQStateAbbrev)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchCommands>()
+                .HasMany(e => e.BranchSubordinateTier1)
+                .WithRequired(e => e.BranchCommands)
+                .HasForeignKey(e => e.branchCommandID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<BranchSubordinateTier1>()
+                .Property(e => e.name)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchSubordinateTier1>()
+                .Property(e => e.HQCity)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchSubordinateTier1>()
+                .Property(e => e.HQStateAbbrev)
+                .IsFixedLength()
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchSubordinateTier1>()
+                .Property(e => e.HQCountryCode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<BranchSubordinateTier1>()
+                .Property(e => e.webAddress)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<CommandRelationships>()
+                .Property(e => e.description)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsInventory>()
+                .Property(e => e.id)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsInventory>()
+                .Property(e => e.metaDataID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsInventory>()
+                .Property(e => e.locationID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsInventory>()
+                .Property(e => e.serialNumber)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<MunitionsInventory>()
+                .Property(e => e.lastUpdateUserId)
                 .IsUnicode(false);
         }
     }

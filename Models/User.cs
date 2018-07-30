@@ -11,11 +11,8 @@ namespace AMPS9000_WebAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            Alerts = new HashSet<Alert>();
-            Alerts1 = new HashSet<Alert>();
             MunitionStatus = new HashSet<MunitionStatu>();
             PEDTeams = new HashSet<PEDTeam>();
-            PersonnelStatus = new HashSet<PersonnelStatu>();
         }
 
         [StringLength(36)]
@@ -38,19 +35,17 @@ namespace AMPS9000_WebAPI
 
         public DateTime? LastLogin { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alert> Alerts { get; set; }
+        [StringLength(6)]
+        public string UnitIdentificationCode { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alert> Alerts1 { get; set; }
+        [Required]
+        [StringLength(255)]
+        public string PasswordSalt { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MunitionStatu> MunitionStatus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PEDTeam> PEDTeams { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PersonnelStatu> PersonnelStatus { get; set; }
     }
 }

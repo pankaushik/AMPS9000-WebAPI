@@ -17,10 +17,11 @@ namespace AMPS9000_WebAPI
 
         public DateTime createDate { get; set; }
 
-        public string name { get; set; }
-
         [Required]
         [StringLength(36)]
         public string createUserId { get; set; }
+
+        [StringLength(200)]
+        public string name { get; set; }
     }
 }

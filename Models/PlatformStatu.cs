@@ -10,7 +10,7 @@ namespace AMPS9000_WebAPI
     {
         [Key]
         [StringLength(36)]
-        public string PlatformID { get; set; }
+        public string PlatformInventoryID { get; set; }
 
         public int StatusCode { get; set; }
 

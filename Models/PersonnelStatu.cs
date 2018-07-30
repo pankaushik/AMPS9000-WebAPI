@@ -26,7 +26,5 @@ namespace AMPS9000_WebAPI
         [Required]
         [StringLength(36)]
         public string lastUpdateUserId { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

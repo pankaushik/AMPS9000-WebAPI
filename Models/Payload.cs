@@ -11,11 +11,6 @@ namespace AMPS9000_WebAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payload()
         {
-            IntelRequests = new HashSet<IntelRequest>();
-            IntelRequests1 = new HashSet<IntelRequest>();
-            Platforms = new HashSet<Platform>();
-            Platforms1 = new HashSet<Platform>();
-            Platforms2 = new HashSet<Platform>();
         }
 
         [StringLength(36)]
@@ -25,7 +20,7 @@ namespace AMPS9000_WebAPI
         public string PayloadReferenceCode { get; set; }
 
         [StringLength(150)]
-        public string PaylodWireframe { get; set; }
+        public string PayloadWireframe { get; set; }
 
         [StringLength(150)]
         public string PayloadPhoto { get; set; }
@@ -42,16 +37,13 @@ namespace AMPS9000_WebAPI
         [StringLength(150)]
         public string PayloadDatasheet { get; set; }
 
-        [StringLength(50)]
+        [StringLength(150)]
         public string PayloadName { get; set; }
 
         [StringLength(50)]
         public string PayloadNomenclature { get; set; }
 
-        public int? PayloadRole { get; set; }
-
-        [StringLength(50)]
-        public string PayloadManufacturer { get; set; }
+        public int? PayloadManufacturer { get; set; }
 
         [StringLength(50)]
         public string PayloadExecutiveAgent { get; set; }
@@ -66,7 +58,7 @@ namespace AMPS9000_WebAPI
 
         public decimal? PayloadLength { get; set; }
 
-        public decimal PayloadWidth { get; set; }
+        public decimal? PayloadWidth { get; set; }
 
         public decimal? PayloadHeight { get; set; }
 
@@ -111,25 +103,64 @@ namespace AMPS9000_WebAPI
 
         public int? PayloadMOS3 { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IntelRequest> IntelRequests { get; set; }
+        [StringLength(50)]
+        public string PayloadFrequencyRange { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IntelRequest> IntelRequests1 { get; set; }
+        [StringLength(50)]
+        public string PayloadScanCoverage { get; set; }
 
-        public virtual MOS_Desc MOS_Desc { get; set; }
+        [StringLength(50)]
+        public string PayloadMaximumRange { get; set; }
 
-        public virtual MOS_Desc MOS_Desc1 { get; set; }
+        [StringLength(50)]
+        public string PayloadMapResolution { get; set; }
 
-        public virtual MOS_Desc MOS_Desc2 { get; set; }
+        [StringLength(50)]
+        public string PayloadGroundMapping { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platform> Platforms { get; set; }
+        [StringLength(50)]
+        public string PayloadStripSAR { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platform> Platforms1 { get; set; }
+        [StringLength(50)]
+        public string PayloadSpotlightSAR { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platform> Platforms2 { get; set; }
+        [StringLength(50)]
+        public string PayloadCCEOIR { get; set; }
+
+        [StringLength(50)]
+        public string PayloadGeoReferencing { get; set; }
+
+        [StringLength(50)]
+        public string PayloadChangeDetect { get; set; }
+
+        public int? PayloadLensCount { get; set; }
+
+        [StringLength(50)]
+        public string PayloadImageResolution { get; set; }
+
+        public int? PayloadMaxAltitude { get; set; }
+
+        public int? PayloadMaxRange { get; set; }
+
+        [StringLength(50)]
+        public string PayloadRefreshRateEO { get; set; }
+
+        [StringLength(50)]
+        public string PayloadRefreshRateIR { get; set; }
+
+        [StringLength(50)]
+        public string PayloadAngularCoverage { get; set; }
+
+        [StringLength(50)]
+        public string PayloadAreaCoverage { get; set; }
+
+        [StringLength(50)]
+        public string PayloadVirtualZoom { get; set; }
+
+        [StringLength(50)]
+        public string PayloadCrossCueing { get; set; }
+
+        public int? PayloadType { get; set; }
+
     }
 }

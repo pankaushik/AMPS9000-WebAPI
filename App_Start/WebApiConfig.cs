@@ -15,12 +15,16 @@ namespace AMPS9000_WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
-            EnableCorsAttribute cors = new EnableCorsAttribute("http://localhost:3000,http://localhost:8080,http://localhost:8082", "*", "*");
+            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
             config.EnableCors(cors);
             config.MapHttpAttributeRoutes();
 
             ODataModelBuilder builder = new ODataConventionModelBuilder();
             config.Count().Filter().OrderBy().Select();
+            config.AddODataQueryFilter();
+            config.EnableDependencyInjection();
+
+            builder.EntitySet<Alert>("Alerts");
             builder.EntitySet<BranchOfService>("BranchOfService");
             builder.EntitySet<Personnel>("Personnel");
             builder.EntitySet<PayGrade>("PayGrades");
@@ -31,19 +35,21 @@ namespace AMPS9000_WebAPI
             builder.EntitySet<DutyPosition>("DutyPosition");
             builder.EntitySet<Unit>("Units");
             builder.EntitySet<COCOM>("COCOM");
-            builder.EntitySet<PayloadRole>("PayloadRoles");
             builder.EntitySet<Personnel>("Personnel");
             builder.EntitySet<Location>("Locations");
             builder.EntitySet<Region>("Regions");
             builder.EntitySet<Payload>("Payload");
             builder.EntitySet<Munition>("Munition");
+            builder.EntitySet<MunitionsInventory>("MunitionInventory");
             builder.EntitySet<Platform>("Platform");
+            builder.EntitySet<PlatformInventory>("PlatformInventory");
             builder.EntitySet<MissionType>("MissionType");
             builder.EntitySet<EEIThreat>("EEIThreat");
             builder.EntitySet<LIMIDSReq>("LIMIDSReq");
             builder.EntitySet<IntelReqEEI>("IntelReqEEI");
             builder.EntitySet<IntelRequest>("IntelRequest");
             builder.EntitySet<Payload>("Payload");
+            builder.EntitySet<PayloadInventory>("PayloadInventory");
             builder.EntitySet<Manufacturer>("Manufacturer");
             builder.EntitySet<MapLayer>("MapLayer");
             builder.EntitySet<MapLayerCategory>("MapLayerCategory");
@@ -51,6 +57,15 @@ namespace AMPS9000_WebAPI
             builder.EntitySet<MunitionRole>("MunitionRoles");
             builder.EntitySet<SpecialQualification>("SpecQuals");
             builder.EntitySet<IC_ISM_Classifications>("Clearance");
+            builder.EntitySet<ComsType>("ComsType");
+            builder.EntitySet<PayloadType>("PayloadType");
+            builder.EntitySet<PointsofInterest>("PointsOfInterest");
+            builder.EntitySet<LocationCategory>("LocationCategory");
+            builder.EntitySet<Order>("Order");
+            builder.EntitySet<OrderType>("OrderType");
+            builder.EntitySet<PlatformCategory>("PlatformCategory");
+            builder.EntitySet<GroundControlSystem>("GroundControlSystem");
+            builder.EntitySet<PersonnelStatu>("PersonnelStatus");
             config.MapODataServiceRoute("odata", "api", builder.GetEdmModel());
 
             // Web API routes

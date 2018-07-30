@@ -11,7 +11,6 @@ namespace AMPS9000_WebAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PlatformRole()
         {
-            Platforms = new HashSet<Platform>();
         }
 
         public int id { get; set; }
@@ -25,7 +24,5 @@ namespace AMPS9000_WebAPI
         [StringLength(3)]
         public string languageCode { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Platform> Platforms { get; set; }
     }
 }

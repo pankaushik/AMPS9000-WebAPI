@@ -21,11 +21,11 @@ namespace AMPS9000_WebAPI.Controllers
         {
             var result = (from a in db.Payloads
                           orderby a.PayloadName ascending
-                          select new DropDownDTO { id = a.PayloadID.ToString(), description = a.PayloadName }).AsQueryable();
+                          select new DropDownDTO { id = a.PayloadID.ToString(), description = a.PayloadNomenclature }).AsQueryable();
             return result;
         }
 
-        // GET: api/Payload/5
+        // GET: api/Payload/{guid}
         [ResponseType(typeof(Payload))]
         public IHttpActionResult GetPayload(string id)
         {
@@ -36,6 +36,25 @@ namespace AMPS9000_WebAPI.Controllers
             }
 
             return Ok(payload);
+        }
+
+        // GET: api/Payload/GetPayloadsData
+        public IHttpActionResult GetPayloadsData()
+        {
+            var result = (from a in db.Payloads
+                          join b in db.Companies on a.PayloadManufacturer equals b.id into lojComp
+                          from c in lojComp.DefaultIfEmpty()
+                          select new
+                          {
+                              ID = a.PayloadID,
+                              payload = a.PayloadName,
+                              nomenclature = a.PayloadNomenclature,
+                              manufacturer = c.description,                              
+                              type = a.PayloadType == null ? "Unknown" : db.PayloadTypes.Where(x => x.id == a.PayloadType).Select(x => x.abbreviation).FirstOrDefault(),
+                              typeDescription = a.PayloadType == null ? "Unknown" : db.PayloadTypes.Where(x => x.id == a.PayloadType).Select(x => x.description).FirstOrDefault()
+                          });
+
+            return Ok(result);
         }
 
         // PUT: api/Payload/5
@@ -50,6 +69,26 @@ namespace AMPS9000_WebAPI.Controllers
             if (id != payload.PayloadID)
             {
                 return BadRequest();
+            }
+
+            if(payload.PayloadName == null || payload.PayloadName.Trim() == "")
+            {
+                return BadRequest("Invalid Payload Name: " + payload.PayloadName);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS1))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS1);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS2))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS2);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS3))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS3);
             }
 
             db.Entry(payload).State = EntityState.Modified;
@@ -82,8 +121,27 @@ namespace AMPS9000_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (payload.PayloadName == null || payload.PayloadName.Trim() == "")
+            {
+                return BadRequest("Invalid Payload Name: " + payload.PayloadName);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS1))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS1);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS2))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS2);
+            }
+
+            if (!IsValidMOS(payload.PayloadMOS3))
+            {
+                return BadRequest("Invalid MOS: " + payload.PayloadMOS3);
+            }
+
             payload.PayloadID = Guid.NewGuid().ToString();
-            
 
             db.Payloads.Add(payload);
 
@@ -134,6 +192,18 @@ namespace AMPS9000_WebAPI.Controllers
         private bool PayloadExists(string id)
         {
             return db.Payloads.Count(e => e.PayloadID == id) > 0;
+        }
+
+        private bool IsValidMOS(int? MOS)
+        {
+            if (MOS == null)
+            {
+                return true;  //true will be ignored as this is an optional field
+            }
+            else
+            {
+                return db.MOS_Desc.Count(e => e.id == MOS) > 0;
+            }
         }
     }
 }

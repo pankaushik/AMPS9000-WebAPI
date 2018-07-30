@@ -20,6 +20,7 @@ namespace AMPS9000_WebAPI.Controllers
         public IQueryable<IntelRequest> GetIntelRequests()
         {
             db.Configuration.LazyLoadingEnabled = false;
+
             return db.IntelRequests;
         }
 
@@ -35,6 +36,27 @@ namespace AMPS9000_WebAPI.Controllers
             }
 
             return Ok(intelRequest);
+        }
+
+        // GET: api/IntelRequest/GetRequestStatus
+        public IHttpActionResult GetRequestStatus()
+        {
+            var result = (from p in db.StatusCodes.Where(x => x.type == 2)
+                         join q in db.IntelReqStatus on p.id equals q.Status into j1
+                         from j2 in j1.DefaultIfEmpty()
+                         group j2 by p.id into grouped
+                         select new
+                         {
+                             StatusID = grouped.Key,
+                             Count = grouped.Sum(x => x.IntelRequestID != null ? 1 : 0)
+                         }).AsEnumerable()
+                         .Select(pt => new
+                         {
+                             StatusID = pt.StatusID,
+                             Count = pt.Count
+                         }).ToList();
+
+            return Ok(result);
         }
 
         // PUT: api/IntelRequest/5
@@ -92,7 +114,7 @@ namespace AMPS9000_WebAPI.Controllers
                 {
                     IntelRequestID = intelRequest.IntelRequestID,
                     StatusDateTime = DateTime.Now,
-                    Status = 1  //Pending
+                    Status = (int)IntelReqStatuses.PENDING
                 }
             };
 
@@ -112,6 +134,27 @@ namespace AMPS9000_WebAPI.Controllers
                 {
                     throw;
                 }
+            }
+
+            db.Alerts.Add(new Alert
+            { 
+                id = Guid.NewGuid().ToString(),
+                Type = 1,    //Action Item
+                Message = "Intel Request #" + intelRequest.ReqUserFrndlyID + " Pending Review",
+                DashboardInd = true,
+                Complete = false,
+                createDate = DateTime.Now,
+                createUserId = "1",
+                LinkTo = "/intel-request/review/" + intelRequest.IntelRequestID
+            });
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                throw;   
             }
 
             return CreatedAtRoute("DefaultApiPost", new { id = intelRequest.IntelRequestID }, intelRequest);

@@ -38,6 +38,25 @@ namespace AMPS9000_WebAPI.Controllers
             return Ok(munition);
         }
 
+        // GET: api/GetMunitionsData
+        [ResponseType(typeof(Munition))]
+        public IHttpActionResult GetMunitionsData()
+        {
+            var result = (from a in db.Munitions
+                          join b in db.MunitionRoles on a.MunitionRole equals b.id into lojRole
+                          from c in lojRole.DefaultIfEmpty()
+                          select new
+                          {
+                              ID = a.MunitionID,
+                              munition = a.MunitionName,
+                              role = c.description ?? "Unknown",
+                              reference = a.MunitionsReferenceCode ?? ""
+                          });
+
+            return Ok(result);
+        }
+
+
         // PUT: api/Munition/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMunition(string id, Munition munition)
@@ -50,6 +69,31 @@ namespace AMPS9000_WebAPI.Controllers
             if (id != munition.MunitionID)
             {
                 return BadRequest();
+            }
+
+            if (munition.MunitionName == null || munition.MunitionName.Trim() == "")
+            {
+                return BadRequest("Invalid Munition Name: " + munition.MunitionName);
+            }
+
+            if (!IsValidMunitionRole(munition.MunitionRole))
+            {
+                return BadRequest("Invalid Munition Role: " + munition.MunitionRole);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS1))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS1);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS2))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS2);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS3))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS3);
             }
 
             db.Entry(munition).State = EntityState.Modified;
@@ -73,6 +117,18 @@ namespace AMPS9000_WebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        private bool IsValidMunitionRole(int? munitionRole)
+        {
+            if (munitionRole == null)
+            {
+                return true;  //true will be ignored as this is an optional field
+            }
+            else
+            {
+                return db.MunitionRoles.Count(e => e.id == munitionRole) > 0;
+            }
+        }
+
         // POST: api/Munition
         [ResponseType(typeof(Munition))]
         public IHttpActionResult PostMunition(Munition munition)
@@ -80,6 +136,31 @@ namespace AMPS9000_WebAPI.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            if(munition.MunitionName == null || munition.MunitionName.Trim() == "")
+            {
+                return BadRequest("Invalid Munition Name: " + munition.MunitionName);
+            }
+
+            if (!IsValidMunitionRole(munition.MunitionRole))
+            {
+                return BadRequest("Invalid Munition Role: " + munition.MunitionRole);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS1))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS1);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS2))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS2);
+            }
+
+            if (!IsValidMOS(munition.MunitionMOS3))
+            {
+                return BadRequest("Invalid MOS: " + munition.MunitionMOS3);
             }
 
             munition.MunitionID = Guid.NewGuid().ToString();
@@ -133,6 +214,18 @@ namespace AMPS9000_WebAPI.Controllers
         private bool MunitionExists(string id)
         {
             return db.Munitions.Count(e => e.MunitionID == id) > 0;
+        }
+
+        private bool IsValidMOS(int? MOS)
+        {
+            if (MOS == null)
+            {
+                return true;  //true will be ignored as this is an optional field
+            }
+            else
+            {
+                return db.MOS_Desc.Count(e => e.id == MOS) > 0;
+            }
         }
     }
 }

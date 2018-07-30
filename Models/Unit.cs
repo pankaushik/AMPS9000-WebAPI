@@ -11,12 +11,13 @@ namespace AMPS9000_WebAPI
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Unit()
         {
-            IntelRequests = new HashSet<IntelRequest>();
-            Personnels = new HashSet<Personnel>();
-            Personnels1 = new HashSet<Personnel>();
+           
         }
 
         public int id { get; set; }
+
+        [Required]
+        public int branchSubordinateTier1ID { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -27,13 +28,13 @@ namespace AMPS9000_WebAPI
         [StringLength(3)]
         public string languageCode { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<IntelRequest> IntelRequests { get; set; }
+        [StringLength(100)]
+        public string HQCity { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personnel> Personnels { get; set; }
+        [StringLength(2)]
+        public string HQStateAbbrev { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Personnel> Personnels1 { get; set; }
+        [StringLength(10)]
+        public string HQCountryCode { get; set; }
     }
 }

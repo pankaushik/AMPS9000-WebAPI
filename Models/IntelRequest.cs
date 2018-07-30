@@ -17,6 +17,9 @@ namespace AMPS9000_WebAPI
         [StringLength(36)]
         public string IntelRequestID { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ReqUserFrndlyID { get; set; }
+
         public DateTime? OrignatedDateTime { get; set; }
 
         [StringLength(36)]
@@ -24,8 +27,7 @@ namespace AMPS9000_WebAPI
 
         public int? AreaOfOperations { get; set; }
 
-        [StringLength(50)]
-        public string SupportedCommand { get; set; }
+        public int? SupportedCommand { get; set; }
 
         public int? SupportedUnit { get; set; }
 
@@ -72,6 +74,10 @@ namespace AMPS9000_WebAPI
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IntelReqStatu> IntelReqStatus { get; set; }
+
+        public virtual IntelRequest IntelRequests1 { get; set; }
+
+        public virtual IntelRequest IntelRequest1 { get; set; }
 
         public virtual MissionType MissionType1 { get; set; }
 

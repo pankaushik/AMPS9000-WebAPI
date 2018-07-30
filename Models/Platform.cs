@@ -30,17 +30,12 @@ namespace AMPS9000_WebAPI
         public string PlatformDatasheet { get; set; }
 
         [StringLength(50)]
-        public string PlatformTailNumber { get; set; }
-
-        [StringLength(50)]
         public string PlatformName { get; set; }
 
         [StringLength(50)]
         public string PlatformNomenclature { get; set; }
 
         public int? PlatformCategory { get; set; }
-
-        public int? PlatformService { get; set; }
 
         public int? PlatformRole { get; set; }
 
@@ -90,33 +85,9 @@ namespace AMPS9000_WebAPI
 
         public int? PlatformPayloadCount { get; set; }
 
-        [StringLength(36)]
-        public string PlatformPayload1 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformPayload2 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformPayload3 { get; set; }
-
         public decimal? PlatformArmamentCapacity { get; set; }
 
         public int? PlatformArmamentCount { get; set; }
-
-        [StringLength(36)]
-        public string PlatformArmament1 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformArmament2 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformArmament3 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformComs1 { get; set; }
-
-        [StringLength(36)]
-        public string PlatformComs2 { get; set; }
 
         public int? PlatformFlightCrewReq { get; set; }
 
@@ -134,22 +105,5 @@ namespace AMPS9000_WebAPI
 
         public int? PlatformPEDCrewMOS { get; set; }
 
-        public virtual MOS_Desc MOS_Desc { get; set; }
-
-        public virtual MOS_Desc MOS_Desc1 { get; set; }
-
-        public virtual MOS_Desc MOS_Desc2 { get; set; }
-
-        public virtual MOS_Desc MOS_Desc3 { get; set; }
-
-        public virtual Payload Payload { get; set; }
-
-        public virtual Payload Payload1 { get; set; }
-
-        public virtual Payload Payload2 { get; set; }
-
-        public virtual PlatformCategory PlatformCategory1 { get; set; }
-
-        public virtual PlatformRole PlatformRole1 { get; set; }
     }
 }

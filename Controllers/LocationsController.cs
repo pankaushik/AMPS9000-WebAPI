@@ -39,6 +39,27 @@ namespace AMPS9000_WebAPI.Controllers
             return Ok(locations);
         }
 
+        // GET: api/Locations/GetLocationsData
+        public IHttpActionResult GetLocationsData()
+        {
+            var result = (from a in db.Locations
+                          join b in db.COCOMs on a.LocationCOCOM equals b.id
+                          join c in db.Regions on a.LocationRegion equals c.id
+                          join d in db.Countries on a.LocationCountry equals d.id
+                          orderby a.LocationName ascending
+                          select new {
+                              id = a.LocationID.ToString(),
+                              name = a.LocationName.Trim(),
+                              COCOM = b.description.Trim(),
+                              country = d.description.Trim(),
+                              region = c.description.Trim(),
+                              category = a.LocationCategory1.description == null ? "Unknown" : a.LocationCategory1.description.Trim(),
+                              lastUpdate = a.LastUpdate
+                          }).AsQueryable();
+            return Ok(result);
+
+        }
+
         // PUT: api/Locations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutLocations(string id, Location locations)
@@ -52,6 +73,48 @@ namespace AMPS9000_WebAPI.Controllers
             {
                 return BadRequest();
             }
+
+            if (locations.LocationName == null || locations.LocationName.ToString().Trim() == "")
+            {
+                return BadRequest("Invalid Location Name");
+            }
+
+            if (locations.LocationRegion == null)
+            {
+                return BadRequest("Invalid Region");
+            }
+            else if (db.Regions.Where(x => x.id == locations.LocationRegion).Count() <= 0)
+            {
+                return BadRequest("Invalid Region");
+            }
+
+            if (locations.LocationCountry == null)
+            {
+                return BadRequest("Invalid Country");
+            }
+            else if (db.Countries.Where(x => x.id == locations.LocationCountry).Count() <= 0)
+            {
+                return BadRequest("Invalid Country");
+            }
+
+            if (locations.LocationCOCOM == null || locations.LocationCOCOM.ToString().Trim() == "")
+            {
+                return BadRequest("Invalid COCOM");
+            }
+            else if (db.COCOMs.Where(x => x.id == locations.LocationCOCOM).Count() <= 0)
+            {
+                return BadRequest("Invalid COCOM");
+            }
+
+            if(locations.LocationCategory != null && locations.LocationCategory.ToString().Trim() != "")
+            {
+                if(db.LocationCategories.Where(x => x.id == locations.LocationCategory).Count() <= 0)
+                {
+                    return BadRequest("Invalid Location Category");
+                }
+            }
+
+            locations.LastUpdate = DateTime.Now;
 
             db.Entry(locations).State = EntityState.Modified;
 
@@ -83,12 +146,15 @@ namespace AMPS9000_WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            if(locations.LocationName == null || locations.LocationName == "")
+            if(locations.LocationName == null || locations.LocationName.ToString().Trim() == "")
             {
                 return BadRequest("Invalid Location Name");
-            }
+            } 
 
             if(locations.LocationRegion == null)
+            {
+                return BadRequest("Invalid Region");
+            } else if(db.Regions.Where(x => x.id == locations.LocationRegion).Count() <= 0)
             {
                 return BadRequest("Invalid Region");
             }
@@ -96,9 +162,29 @@ namespace AMPS9000_WebAPI.Controllers
             if (locations.LocationCountry == null)
             {
                 return BadRequest("Invalid Country");
+            } else if (db.Countries.Where(x => x.id == locations.LocationCountry).Count() <= 0)
+            {
+                return BadRequest("Invalid Country");
+            }
+
+            if (locations.LocationCOCOM == null || locations.LocationCOCOM.ToString().Trim() == "")
+            {
+                return BadRequest("Invalid COCOM");
+            } else if (db.COCOMs.Where(x => x.id == locations.LocationCOCOM).Count() <= 0)
+            {
+                return BadRequest("Invalid COCOM");
+            }
+
+            if (locations.LocationCategory != null && locations.LocationCategory.ToString().Trim() != "")
+            {
+                if (db.LocationCategories.Where(x => x.id == locations.LocationCategory).Count() <= 0)
+                {
+                    return BadRequest("Invalid Location Category");
+                }
             }
 
             locations.LocationID = Guid.NewGuid().ToString();
+            locations.LastUpdate = DateTime.Now;
             db.Locations.Add(locations);
 
             try

@@ -8,6 +8,11 @@ namespace AMPS9000_WebAPI
 
     public partial class COCOM
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public COCOM()
+        {
+        }
+
         public int id { get; set; }
 
         [Required]

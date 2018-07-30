@@ -10,7 +10,7 @@ namespace AMPS9000_WebAPI
     {
         [Key]
         [StringLength(36)]
-        public string MunitionID { get; set; }
+        public string MunitionInventoryID { get; set; }
 
         public int StatusCode { get; set; }
 

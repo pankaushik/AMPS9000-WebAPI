@@ -89,12 +89,32 @@ namespace AMPS9000_WebAPI
 
         public int? MunitionMOS3 { get; set; }
 
-        public virtual MOS_Desc MOS_Desc { get; set; }
+        public decimal? MunitionHeight { get; set; }
 
-        public virtual MOS_Desc MOS_Desc1 { get; set; }
+        public decimal? MunitionWeightUnloaded { get; set; }
 
-        public virtual MOS_Desc MOS_Desc2 { get; set; }
+        public decimal? MunitionWeightLoaded { get; set; }
 
-        public virtual MunitionRole MunitionRole1 { get; set; }
+        public int? MunitionRoundsCarried { get; set; }
+
+        public int? MunitionRateFire { get; set; }
+
+        public int? MunitionMuzzleVelocity { get; set; }
+
+        public decimal? MunitionProjectileWeight { get; set; }
+
+        [StringLength(50)]
+        public string MunitionCaliber { get; set; }
+
+        [StringLength(50)]
+        public string MunitionDriveSystem { get; set; }
+
+        [StringLength(50)]
+        public string MunitionFeedSystem { get; set; }
+
+        [StringLength(50)]
+        public string MunitionMuzzleEnergy { get; set; }
+
+        
     }
 }

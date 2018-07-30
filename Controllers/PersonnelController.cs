@@ -17,7 +17,7 @@ namespace AMPS9000_WebAPI.Controllers
         private AMPS9000DB db = new AMPS9000DB();
 
         // GET: api/Personnel
-        public IQueryable<DropDownDTO> GetPersonnels()
+        public IQueryable<DropDownDTO> GetPersonnel()
         {
             var result = (from a in db.Personnels
                           orderby a.FirstName ascending
@@ -25,7 +25,7 @@ namespace AMPS9000_WebAPI.Controllers
             return result;
         }
 
-        // GET: api/Personnel/5
+        // GET: api/Personnel/{guid}
         [ResponseType(typeof(Personnel))]
         public IHttpActionResult GetPersonnel(string id)
         {
@@ -38,7 +38,56 @@ namespace AMPS9000_WebAPI.Controllers
             return Ok(personnel);
         }
 
-        // PUT: api/Personnel/5
+        // GET: api/Personnel/GetPersonnelData
+        public IHttpActionResult GetPersonnelData()
+        {
+            var result = (from a in db.Personnels
+                          join b in db.PersonnelStatus on a.PersonnelID equals b.PersonnelID
+                          join c in db.MOS_Desc on a.MOS1 equals c.id into lojMOS1
+                          from d in lojMOS1.DefaultIfEmpty()
+                          join e in db.MOS_Desc on a.MOS2 equals e.id into lojMOS2
+                          from f in lojMOS2.DefaultIfEmpty()
+                          join g in db.MOS_Desc on a.MOS3 equals g.id into lojMOS3
+                          from h in lojMOS3.DefaultIfEmpty()
+                          select new
+                          {
+                              ID = a.PersonnelID,
+                              CACID = a.CACid ?? "Unknown",
+                              fullName = a.LastName + ", " + a.FirstName,
+                              firstName = a.FirstName,
+                              lastName = a.LastName,
+                              company = db.Companies.Where(x => x.id == a.Company).Select(x => x.description).FirstOrDefault(),
+                              rank = new
+                              {
+                                  id = a.Rank,
+                                  abbreviation = db.Ranks.Where(x => x.id == a.Rank).Select(x => x.rankAbbreviation).FirstOrDefault(),
+                                  description = db.Ranks.Where(x => x.id == a.Rank).Select(x => x.description).FirstOrDefault(),
+                              },
+                              branchOfService = new
+                              {
+                                  id = a.ServiceBranch,
+                                  description = db.BranchOfServices.Where(x => x.id == a.ServiceBranch).Select(x => x.description).FirstOrDefault()
+                              },
+                              mos = d.MOSCode + ", " + f.MOSCode + ", " + h.MOSCode,
+                              duty = a.DutyPosition.description,
+                              arrive = b.PersonnelArrive,
+                              depart = b.PersonnelDepart,
+                              deployedUnit = new
+                              {
+                                  id = a.DeployedUnit,
+                                  description = db.Units.Where(x => x.id == a.DeployedUnit).Select(x => x.description).FirstOrDefault()
+                              },
+                              assignedUnit = new
+                              {
+                                  id = a.AssignedUnit,
+                                  description = db.Units.Where(x => x.id == a.AssignedUnit).Select(x => x.description).FirstOrDefault()
+                              }
+                          });
+
+            return Ok(result);
+        }
+
+        // PUT: api/Personnel/{guid}
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPersonnel(string id, Personnel personnel)
         {
@@ -89,6 +138,19 @@ namespace AMPS9000_WebAPI.Controllers
 
             try
             {
+                db.SaveChanges();
+
+                PersonnelStatu pStatus = new PersonnelStatu
+                {
+                    PersonnelID = personnel.PersonnelID,
+                    StatusCode = (int)PersonnelStatuses.PENDING,
+                    PersonnelArrive = personnel.CurrentAssignmentStart ?? DateTime.Today,
+                    PersonnelDepart = personnel.CurrentAssignmentEnd ?? DateTime.Today,
+                    lastUpdate = DateTime.Now,
+                    lastUpdateUserId = "000"
+                };
+
+                db.PersonnelStatus.Add(pStatus);
                 db.SaveChanges();
             }
             catch (DbUpdateException)

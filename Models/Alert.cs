@@ -40,10 +40,11 @@ namespace AMPS9000_WebAPI
         [StringLength(3)]
         public string languageCode { get; set; }
 
+        [StringLength(150)]
+        public string LinkTo { get; set; }
+
+        public virtual AlertType AlertType { get; set; }
+
         public virtual AssetType AssetType1 { get; set; }
-
-        public virtual User User { get; set; }
-
-        public virtual User User1 { get; set; }
     }
 }

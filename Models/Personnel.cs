@@ -103,18 +103,8 @@ namespace AMPS9000_WebAPI
 
         public virtual DutyPosition DutyPosition5 { get; set; }
 
-        public virtual MOS_Desc MOS_Desc { get; set; }
-
-        public virtual MOS_Desc MOS_Desc1 { get; set; }
-
-        public virtual MOS_Desc MOS_Desc2 { get; set; }
-
         public virtual PayGrade PayGrade1 { get; set; }
 
         public virtual Rank Rank1 { get; set; }
-
-        public virtual Unit Unit { get; set; }
-
-        public virtual Unit Unit1 { get; set; }
     }
 }
