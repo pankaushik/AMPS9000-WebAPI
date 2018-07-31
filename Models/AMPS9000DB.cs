@@ -428,6 +428,26 @@ namespace AMPS9000_WebAPI
                 .Property(e => e.LocationNai)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Location>()
+                .Property(e => e.StateAbbrev)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Location>()
+                .Property(e => e.webAddress)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Location>()
+                .Property(e => e.IATA)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Location>()
+                .Property(e => e.ICAO)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Location>()
+                .Property(e => e.FAA)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Manufacturer>()
                 .Property(e => e.description)
                 .IsUnicode(false);

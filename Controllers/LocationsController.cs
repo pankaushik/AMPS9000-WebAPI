@@ -26,7 +26,7 @@ namespace AMPS9000_WebAPI.Controllers
             return result;
         }
 
-        // GET: api/Locations/5
+        // GET: api/Locations/{guid}
         [ResponseType(typeof(Location))]
         public IHttpActionResult GetLocations(string id)
         {
@@ -43,16 +43,19 @@ namespace AMPS9000_WebAPI.Controllers
         public IHttpActionResult GetLocationsData()
         {
             var result = (from a in db.Locations
-                          join b in db.COCOMs on a.LocationCOCOM equals b.id
-                          join c in db.Regions on a.LocationRegion equals c.id
-                          join d in db.Countries on a.LocationCountry equals d.id
+                          join b in db.COCOMs on a.LocationCOCOM equals b.id into lojCOCOM
+                          join c in db.Regions on a.LocationRegion equals c.id into lojReg
+                          join d in db.Countries on a.LocationCountry equals d.id into lojCountry
+                          from e in lojCOCOM.DefaultIfEmpty()
+                          from f in lojReg.DefaultIfEmpty()
+                          from g in lojCountry.DefaultIfEmpty()
                           orderby a.LocationName ascending
                           select new {
                               id = a.LocationID.ToString(),
                               name = a.LocationName.Trim(),
-                              COCOM = b.description.Trim(),
-                              country = d.description.Trim(),
-                              region = c.description.Trim(),
+                              COCOM = e.description == null ? "Unknown" : e.description.Trim(),
+                              country = g.description == null ? "Unknown" : g.description.Trim(),
+                              region = f.description == null ? "Unknown" : f.description.Trim(),
                               category = a.LocationCategory1.description == null ? "Unknown" : a.LocationCategory1.description.Trim(),
                               lastUpdate = a.LastUpdate
                           }).AsQueryable();
@@ -60,7 +63,7 @@ namespace AMPS9000_WebAPI.Controllers
 
         }
 
-        // PUT: api/Locations/5
+        // PUT: api/Locations/{guid}
         [ResponseType(typeof(void))]
         public IHttpActionResult PutLocations(string id, Location locations)
         {

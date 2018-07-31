@@ -74,6 +74,21 @@ namespace AMPS9000_WebAPI
         [StringLength(50)]
         public string LocationNai { get; set; }
 
+        [StringLength(2)]
+        public string StateAbbrev { get; set; }
+
+        [StringLength(200)]
+        public string webAddress { get; set; }
+
+        [StringLength(10)]
+        public string IATA { get; set; }
+
+        [StringLength(10)]
+        public string ICAO { get; set; }
+
+        [StringLength(10)]
+        public string FAA { get; set; }
+
         public virtual LocationCategory LocationCategory1 { get; set; }
 
     }
