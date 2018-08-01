@@ -61,7 +61,6 @@ namespace AMPS9000_WebAPI
         public virtual DbSet<Platform> Platforms { get; set; }
         public virtual DbSet<PlatformInventory> PlatformInventory { get; set; }
         public virtual DbSet<PlatformStatu> PlatformStatus { get; set; }
-        public virtual DbSet<PointsofInterest> PointsofInterests { get; set; }
         public virtual DbSet<RankClassification> RankClassifications { get; set; }
         public virtual DbSet<Rank> Ranks { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
@@ -510,6 +509,9 @@ namespace AMPS9000_WebAPI
             modelBuilder.Entity<MOS_Desc>()
                 .Property(e => e.languageCode)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<MOS_Desc>()
+                .Property(e => e.branchOfServiceID);
 
             modelBuilder.Entity<MunitionRole>()
                 .Property(e => e.description)
@@ -1217,50 +1219,6 @@ namespace AMPS9000_WebAPI
 
             modelBuilder.Entity<PlatformStatu>()
                 .Property(e => e.lastUpdateUserId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.PointofInterestID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.ReferenceCode)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.Description)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.Image)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.Document)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.MGRS)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.Elevation)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.createUserId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.lastUpdateUserId)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<PointsofInterest>()
-                .Property(e => e.KML)
                 .IsUnicode(false);
 
             modelBuilder.Entity<RankClassification>()

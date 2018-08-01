@@ -17,9 +17,13 @@ namespace AMPS9000_WebAPI.Controllers
         private AMPS9000DB db = new AMPS9000DB();
 
         // GET: api/LocationCategory
-        public IQueryable<LocationCategory> GetLocationCategories()
+        public IQueryable<DropDownDTO> GetLocationCategories()
         {
-            return db.LocationCategories;
+            var results = (from a in db.LocationCategories
+                           orderby a.displayOrder, a.description
+                           select new DropDownDTO { id = a.id.ToString(), description = a.description });
+
+            return results;
         }
 
         // GET: api/LocationCategory/5

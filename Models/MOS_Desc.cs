@@ -28,5 +28,7 @@ namespace AMPS9000_WebAPI
         [StringLength(3)]
         public string languageCode { get; set; }
 
+        public int branchOfServiceID { get; set; }
+
     }
 }

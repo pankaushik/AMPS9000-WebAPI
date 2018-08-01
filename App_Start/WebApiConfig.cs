@@ -59,7 +59,6 @@ namespace AMPS9000_WebAPI
             builder.EntitySet<IC_ISM_Classifications>("Clearance");
             builder.EntitySet<ComsType>("ComsType");
             builder.EntitySet<PayloadType>("PayloadType");
-            builder.EntitySet<PointsofInterest>("PointsOfInterest");
             builder.EntitySet<LocationCategory>("LocationCategory");
             builder.EntitySet<Order>("Order");
             builder.EntitySet<OrderType>("OrderType");

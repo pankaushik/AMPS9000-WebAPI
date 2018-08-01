@@ -26,6 +26,20 @@ namespace AMPS9000_WebAPI.Controllers
             return result;
         }
 
+        public IHttpActionResult GetRanksByBranch(int branchID)
+        {
+            if(db.BranchOfServices.Where(x => x.id == branchID).Count() <= 0)
+            {
+                return NotFound();
+            }
+
+            var results = (from a in db.Ranks
+                           where a.branchOfServiceID == branchID
+                           select new DropDownDTO { id = a.id.ToString(), description = (a.description.Trim() + " (" + a.rankAbbreviation.Trim() + ")") });
+
+            return Ok(results);
+        }
+
         // GET: api/Ranks/5
         [ResponseType(typeof(Rank))]
         public IHttpActionResult GetRanks(int id)

@@ -49,6 +49,8 @@ namespace AMPS9000_WebAPI.Controllers
                           {
                               ID = a.MunitionID,
                               munition = a.MunitionName,
+                              nomenclature = a.MunitionNomenclature,
+                              manufacturer = a.MunitionManufacturer ?? "Unknown",
                               role = c.description ?? "Unknown",
                               reference = a.MunitionsReferenceCode ?? ""
                           });

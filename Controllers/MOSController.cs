@@ -26,6 +26,21 @@ namespace AMPS9000_WebAPI.Controllers
             return result;
         }
 
+        public IHttpActionResult GetMOSDescByBranch(int branchID)
+        {
+            if(db.BranchOfServices.Where(x => x.id == branchID).Count() <= 0)
+            {
+                return NotFound();
+            }
+
+            var result = (from a in db.MOS_Desc
+                          where a.branchOfServiceID == branchID
+                          orderby a.description ascending
+                          select new DropDownDTO { id = a.id.ToString(), description = (a.MOSCode.Trim() + " - " + a.description.Trim()) }).AsQueryable();
+
+            return Ok(result);
+        }
+
         // GET: api/MOS/5
         [ResponseType(typeof(MOS_Desc))]
         public IHttpActionResult GetMOS_Desc(int id)

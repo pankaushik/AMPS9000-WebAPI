@@ -343,7 +343,6 @@
     <Compile Include="Controllers\PayloadTypeController.cs" />
     <Compile Include="Controllers\PersonnelStatusController.cs" />
     <Compile Include="Controllers\PlatformInventoryController.cs" />
-    <Compile Include="Controllers\PointsofInterestController.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertRecipient.cs" />
     <Compile Include="Models\AlertType.cs" />
@@ -467,7 +466,6 @@
     <Compile Include="Models\PlatformCategory.cs" />
     <Compile Include="Models\PlatformRole.cs" />
     <Compile Include="Models\PlatformStatu.cs" />
-    <Compile Include="Models\PointsofInterest.cs" />
     <Compile Include="Models\PayloadInventory.cs" />
     <Compile Include="Models\PlatformInventory.cs" />
     <Compile Include="Models\MunitionsInventory.cs" />

@@ -49,7 +49,7 @@ namespace AMPS9000_WebAPI.Controllers
                               ID = a.PayloadID,
                               payload = a.PayloadName,
                               nomenclature = a.PayloadNomenclature,
-                              manufacturer = c.description,                              
+                              manufacturer = c.description ?? "Unknown",                         
                               type = a.PayloadType == null ? "Unknown" : db.PayloadTypes.Where(x => x.id == a.PayloadType).Select(x => x.abbreviation).FirstOrDefault(),
                               typeDescription = a.PayloadType == null ? "Unknown" : db.PayloadTypes.Where(x => x.id == a.PayloadType).Select(x => x.description).FirstOrDefault()
                           });

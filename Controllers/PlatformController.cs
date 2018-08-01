@@ -50,6 +50,8 @@ namespace AMPS9000_WebAPI.Controllers
                           {
                               ID = a.PlatformID,
                               platform = a.PlatformName,
+                              nomenclature = a.PlatformNomenclature,
+                              manufacturer = a.PlatformManufacturer,
                               category = d.abbreviation,
                               categoryDesc = d.description,
                               role = e.description

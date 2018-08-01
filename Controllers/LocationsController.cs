@@ -26,6 +26,21 @@ namespace AMPS9000_WebAPI.Controllers
             return result;
         }
 
+        public IHttpActionResult GetLocationsByCategory(int Category)
+        {
+            if(db.LocationCategories.Where(x => x.id == Category).Count() <= 0)
+            {
+                return NotFound();
+            }
+
+            var result = (from a in db.Locations
+                          where a.LocationCategory == Category
+                          orderby a.LocationName ascending
+                          select new DropDownDTO { id = a.LocationID.ToString(), description = a.LocationName.Trim() });
+
+            return Ok(result);
+        }
+
         // GET: api/Locations/{guid}
         [ResponseType(typeof(Location))]
         public IHttpActionResult GetLocations(string id)

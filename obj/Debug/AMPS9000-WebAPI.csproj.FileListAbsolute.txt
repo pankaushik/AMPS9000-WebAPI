@@ -421,4 +421,3 @@ C:\Users\jery4\source\repos\AMPS9000-WebAPI-2018-07-05\AMPS9000-WebAPI\AMPS9000-
 C:\Users\jery4\source\repos\AMPS9000-WebAPI-2018-07-05\AMPS9000-WebAPI\AMPS9000-WebAPI\obj\Debug\AMPS9000-WebAPI.csproj.CoreCompileInputs.cache
 C:\Users\jery4\source\repos\AMPS9000-WebAPI-2018-07-05\AMPS9000-WebAPI\AMPS9000-WebAPI\obj\Debug\AMPS9000-WebAPI.dll
 C:\Users\jery4\source\repos\AMPS9000-WebAPI-2018-07-05\AMPS9000-WebAPI\AMPS9000-WebAPI\obj\Debug\AMPS9000-WebAPI.pdb
-C:\Users\jery4\source\repos\AMPS9000-WebAPI-2018-07-05\AMPS9000-WebAPI\AMPS9000-WebAPI\obj\Debug\AMPS9000-WebAPI.csprojResolveAssemblyReference.cache
